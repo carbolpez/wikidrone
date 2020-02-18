@@ -1,0 +1,18 @@
+.position-left{
+  margin-left: 10px;
+}
+
+.titleContainer{
+	margin-top:10px;
+	margin-left:10px;
+	color:orange;
+	vertical-align:middle;
+	font-style:italic;
+}
+
+.titleDetail{
+	margin-top:10px;
+	margin-left:10px;
+	vertical-align:middle;
+	font-style:italic;
+}

@@ -9,6 +9,26 @@ let accounts;
 let wikidroneAddress;
 let wikidrone;
 let track;
+let pointA = {
+  "type": "Feature",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [125.6, 10.1]
+  },
+  "properties": {
+    "name": "Dinagat Islands"
+  }
+};
+let pointB = {
+  "type": "Feature",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [125.6, 10.2]
+  },
+  "properties": {
+    "name": "Dinagat Islands"
+  }
+}
 
 beforeEach(async () => {
     accounts = await web3.eth.getAccounts();
@@ -17,15 +37,14 @@ beforeEach(async () => {
       .send({ from: accounts[0], gas: '1000000'});
     track = {
       operator:accounts[1],
-      start:JSON.stringify({a:'a',b:'b'}),
-      finish:JSON.stringify({a:'a',b:'b'}),
-      routePoints:JSON.stringify([{a:'a',b:'b'},{a:'a',b:'b'}]),
+      start:JSON.stringify(pointA),
+      finish:JSON.stringify(pointB),
+      routePoints:JSON.stringify([pointA,pointB]),
       startTime:new Date().getTime(),
       endTime:new Date().getTime(),
       minAltitude:0,
       maxAltitude:100,
       description:'Test track',
-      //Metadata is the key for the track
       metadata:'test metadata'
     }
 });

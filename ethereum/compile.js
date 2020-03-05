@@ -7,8 +7,10 @@ fs.removeSync(buildPath);
 
 console.log('Init...');
 const wikidronePath = path.resolve(__dirname, 'contracts', 'Wikidrone.sol');
+//console.log('wikidronePath: ' + wikidronePath);
 const source = fs.readFileSync(wikidronePath, 'utf8');
-console.log('Starting compile action ...');
+//console.log('Starting compile action: ' + source);
+console.log('compilacion: ' + solc.compile(source, 1));
 const output = solc.compile(source, 1).contracts;
 console.log('Finis compilation:\n ' + output);
 fs.ensureDirSync(buildPath);
@@ -20,5 +22,4 @@ for(let contract in output) {
     path.resolve(buildPath, contract.replace(':', '') + '.json'),
     output[contract]
   );
-  console.log('contract: ' + contract);
 }

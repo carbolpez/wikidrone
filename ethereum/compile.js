@@ -12,7 +12,7 @@ const source = fs.readFileSync(wikidronePath, 'utf8');
 //console.log('Starting compile action: ' + source);
 console.log('compilacion: ' + solc.compile(source, 1));
 const output = solc.compile(source, 1).contracts;
-console.log('Finis compilation:\n ' + output);
+console.log('Finish compilation:\n ' + output);
 fs.ensureDirSync(buildPath);
 console.log('Dir created: ' + buildPath);
 console.log(output);

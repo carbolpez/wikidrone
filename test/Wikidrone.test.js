@@ -1,7 +1,8 @@
 const assert = require('assert');
 const ganache = require('ganache-cli');
 const Web3 = require('web3');
-const web3 = new Web3(ganache.provider());
+//const web3 = new Web3(ganache.provider());
+const web3 = new Web3('ws://127.0.0.1:7545');
 
 const compiledWikidrone = require('../ethereum/build/Wikidrone.json');
 
@@ -34,7 +35,7 @@ beforeEach(async () => {
     accounts = await web3.eth.getAccounts();
     wikidrone = await new web3.eth.Contract(JSON.parse(compiledWikidrone.interface))
       .deploy({ data: compiledWikidrone.bytecode, arguments: [accounts[0]]})
-      .send({ from: accounts[0], gas: '1000000'});
+      .send({ from: accounts[0], gas: '4700000'});
     track = {
       operator:accounts[1],
       start:JSON.stringify(pointA),

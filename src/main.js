@@ -15,7 +15,7 @@ export const router = new VueRouter({
     { name: 'detail', path: '/detail', component: DetailContainer, props: true },
   ]
 })
-
+console.log('Iniciando...');
 new Vue({
   //store: store  Cuando key y value son identicos dejamos solo un valor
   store,

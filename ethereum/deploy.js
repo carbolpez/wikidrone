@@ -1,6 +1,11 @@
+const HDWalletProvider = require('truffle-hdwallet-provider')
 const ganache = require ('ganache-cli');
 const Web3 = require('web3');
-const provider = ganache.provider();
+//const provider = ganache.provider();
+const provider = new HDWalletProvider(
+  'artwork monitor anxiety trust expose virus mail destroy act catalog inflict pattern',
+  'https://rinkeby.infura.io/v3/7c78df80410f4806a38639fb8550bcef'
+);
 const web3 = new Web3(provider);
 const wikidrone = require('./build/Wikidrone.json');
 
@@ -13,7 +18,7 @@ const wikidrone = require('./build/Wikidrone.json');
    //result es una instancia del contract desplegado
    const result = await new web3.eth.Contract(
      JSON.parse(wikidrone.interface))
-   .deploy({ data: wikidrone.bytecode })
+   .deploy({ data: '0x' + wikidrone.bytecode, arguments: [accounts[0]]})
    .send({ gas: '1000000', from: accounts[0]});
 
    console.log('Contract deployd to', result.options.address);

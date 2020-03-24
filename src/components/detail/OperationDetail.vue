@@ -1,12 +1,22 @@
 <template>
   <div class="container">
-  <h5 class="titleDetail">{{ operation }}</h5>
+  <h5 class="titleDetail">{{ operation.description }}</h5>
   <div class="row border">
     <div class="col-md-7 border content">
-    Informacion de mapa
+
     </div>
     <div class="col-md-4 border content">
-    Detalle de mapa
+      <form>
+        <div class="form-row">
+            <label>Operator Address</label><label> {{operation.operator}} </label>
+        </div>
+        <div class="form-row">
+            <label>startTime</label><label> {{operation.startTime}} </label>
+        </div>
+        <div class="form-row">
+            <label>endTime</label><label> {{operation.endTime}} </label>
+        </div>
+      </form>
     </div>
   </div>
   </div>
@@ -32,5 +42,8 @@
 margin-left:5px;
 margin-top:10px;
 margin-bottom:10px;
+}
+.label{
+margin-left:10px;
 }
 </style>

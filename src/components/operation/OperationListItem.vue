@@ -1,6 +1,6 @@
 <template>
   <li class="list-group-item media" @click="onOperationSelect">
-  {{ operation }}
+  {{ operation.description }}
   </li>
 </template>
 

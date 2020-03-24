@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve --port 8080",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test": "mocha"
+    "test": "mocha",
+    "load": "node ethereum/load.js"
   },
   "dependencies": {
     "axios": "^0.19.2",

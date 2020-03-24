@@ -13,6 +13,8 @@ const actions = {
     console.log('findOperations --> ' + searchTerm);
     const tracksCount = await wikidrone.methods.tracksCount().call();
     console.log("wikidrone trackscount: " + tracksCount);
+    const operatorsCount = await wikidrone.methods.operatorsCount().call();
+    console.log("wikidrone operatorsCount: " + operatorsCount);
     var newTracks = [];
     /*
     newTracks[0] = searchTerm + '0';

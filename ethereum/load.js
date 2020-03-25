@@ -10,20 +10,20 @@ let pointA = {
   type: "Feature",
   geometry: {
     type: "Point",
-    coordinates: [125.6, 10.1]
+    coordinates: [-3.684936, 40.497720]
   },
   properties: {
-    name: "Dinagat Islands"
+    name: "Madrid inicio"
   }
 };
 let pointB = {
   type: "Feature",
   geometry: {
     type: "Point",
-    coordinates: [125.6, 10.2]
+    coordinates: [-3.677471, 40.491673]
   },
   properties: {
-    name: "Dinagat Islands"
+    name: "Madrid Final"
   }
 };
 
@@ -46,8 +46,8 @@ const load = async () => {
     endTime:new Date().getTime(),
     minAltitude:0,
     maxAltitude:100,
-    description:'Test track 1',
-    metadata:'1'
+    description:'Test track 2',
+    metadata:'2'
   }
 /*
 //Registers an operator

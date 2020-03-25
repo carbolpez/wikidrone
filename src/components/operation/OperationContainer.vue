@@ -2,7 +2,7 @@
 	<div class="col-md-9 border rounded">
 		<SearchBar @termChange="findOperations"></SearchBar>
 	<ul class="list-group">
-		<OperationListItem 	v-for="operation in allTracks"	:operation="operation" :key="operation" @operationSelect="operationSelect">
+		<OperationListItem 	v-for="operation in allTracks"	:operation="operation" :key="operation.metadata" @operationSelect="operationSelect">
 		</OperationListItem>
 	</ul>
 	<br>
@@ -37,7 +37,7 @@ import { mapActions,mapGetters} from 'vuex';
 					this.findTracks(searchTerm);
 				},//onTermChange
 				operationSelect: function(operation){
-					console.log("operationSelect --> " + operation);
+					//console.log("operationSelect --> " + operation);
 					router.push({name:'detail', params: {operation}});
 				}//operationSelect
 		}//methods

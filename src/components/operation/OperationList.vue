@@ -2,7 +2,7 @@
 <div>
 	<ul class="list-group">
 	<!--Key mejora el rendimiento. Debe ser unico -->
-		<OperationListItem 	v-for="operation in operations"	:operation="operation" :key="operation">
+		<OperationListItem 	v-for="operation in operations"	:operation="operation" :key="operation.metadata">
 		</OperationListItem>
 	</ul>
 	</div>

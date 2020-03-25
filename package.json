@@ -13,6 +13,7 @@
     "axios": "^0.19.2",
     "core-js": "^3.4.4",
     "ganache-cli": "^6.9.1",
+    "google-maps-api-loader": "^1.1.1",
     "mocha": "^7.1.0",
     "solc": "^0.4.25",
     "truffle-hdwallet-provider": "^1.0.17",

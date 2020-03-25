@@ -3,6 +3,7 @@ pragma solidity ^0.4.17;
 contract Wikidrone {
 
     struct Track {
+        uint id;
         address operator;
         string start;
         string finish;

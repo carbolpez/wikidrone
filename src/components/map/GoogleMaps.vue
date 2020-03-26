@@ -20,13 +20,31 @@ export default {
       center: {lat: startPoint.geometry.coordinates[1], lng:startPoint.geometry.coordinates[0]},
       zoom: 13
     });
+    //StartPoint
     var latLng1 = new window.google.maps.LatLng(startPoint.geometry.coordinates[1],startPoint.geometry.coordinates[0]);
-
     var marker1 = new window.google.maps.Marker({
            position: latLng1,
            map: this.map,
            title: 'Start Point'
          });
+
+    //Route Points
+    let routePoints = JSON.parse(this.operation.routePoints);
+    var coordinates = new Array();
+    for (var i in routePoints) {
+       console.log("routePoints [" + i + "]: " + routePoints[i]);
+       coordinates.push({lat: routePoints[i].geometry.coordinates[1], lng: routePoints[i].geometry.coordinates[0]});
+    }
+    var flightPath = new window.google.maps.Polyline({
+              path: coordinates,
+              geodesic: true,
+              strokeColor: '#FFA500',
+              strokeOpacity: 1.0,
+              strokeWeight: 2,
+              map: this.map
+            });
+
+    //EndPoint
     var latLng2 = new window.google.maps.LatLng(endPoint.geometry.coordinates[1],endPoint.geometry.coordinates[0]);
     var marker2 = new window.google.maps.Marker({
           position: latLng2,
@@ -35,6 +53,7 @@ export default {
         });
     //Evitar error reportado de uso
     marker1;
+    flightPath;
     marker2;
   }
 }

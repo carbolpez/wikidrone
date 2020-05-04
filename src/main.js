@@ -4,6 +4,8 @@ import App from './App';
 import store from './store';
 import OperationContainer from './components/operation/OperationContainer';
 import DetailContainer from './components/detail/DetailContainer';
+import RegisterContainer from './components/register/RegisterContainer';
+import RegisterListContainer from './components/register/RegisterListContainer';
 
 Vue.use(VueRouter);
 //Si exportamos el objeto lo poemos importar en otro componente
@@ -11,11 +13,12 @@ export const router = new VueRouter({
   //browser router mode
   mode: 'history',
   routes: [
-    { path: '/operation', component: OperationContainer },
-    { name: 'detail', path: '/detail', component: DetailContainer, props: true },
+    { path: '/operation', component: OperationContainer, props:true },
+    { name: 'detail', path: '/detail', component: DetailContainer, props:true },
+    { name: 'register', path: '/register', component: RegisterListContainer, props:true },
+    { name: 'registerNew', path: '/registerNew', component: RegisterContainer, props:true }
   ]
 })
-console.log('Iniciando...');
 new Vue({
   //store: store  Cuando key y value son identicos dejamos solo un valor
   store,

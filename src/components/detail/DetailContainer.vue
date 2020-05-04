@@ -20,4 +20,9 @@
 </script>
 
 <style scoped>
+div{
+margin:10px;
+padding:10px;
+width:100%;
+}
 </style>

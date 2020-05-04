@@ -16,7 +16,7 @@ export default {
   methods: {
     onOperationSelect(event) {
       console.log("onOperationSelect --> " + event.target.innerHTML);
-      this.$emit('operationSelect', this.operation);
+      this.$emit('itemSelect', this.operation);
     }
   }
 };

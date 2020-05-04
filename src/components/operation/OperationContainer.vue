@@ -1,8 +1,9 @@
 <template>
 	<div class="col-md-9 border rounded">
+		<h4 class="titleContainer">Operation List</h4>
 		<SearchBar @termChange="findOperations"></SearchBar>
 	<ul class="list-group">
-		<OperationListItem 	v-for="operation in allTracks"	:operation="operation" :key="operation.metadata" @operationSelect="operationSelect">
+		<OperationListItem 	v-for="operation in allTracks"	:operation="operation" :key="operation.metadata" @itemSelect="operationSelect">
 		</OperationListItem>
 	</ul>
 	<br>

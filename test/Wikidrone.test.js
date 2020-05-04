@@ -1,8 +1,8 @@
 const assert = require('assert');
 const ganache = require('ganache-cli');
 const Web3 = require('web3');
-//const web3 = new Web3(ganache.provider());
-const web3 = new Web3('ws://127.0.0.1:7545');
+const web3 = new Web3(ganache.provider());
+//const web3 = new Web3('ws://127.0.0.1:7545');
 
 const compiledWikidrone = require('../ethereum/build/Wikidrone.json');
 
@@ -62,6 +62,17 @@ describe('Wikidrone', () => {
 
   it('registers an operator', async () => {
     await wikidrone.methods.registerOperator().send({from: accounts[0], gas:'1000000'});
+    const operatorsCount = await wikidrone.methods.operatorsCount().call();
+    assert.equal(operatorsCount, 1);
+  });
+
+  it('check for existen operator', async () => {
+    await wikidrone.methods.registerOperator().send({from: accounts[0], gas:'1000000'});
+    try {
+          await wikidrone.methods.registerOperator().send({from: accounts[0], gas:'1000000'});
+    } catch (e) {
+      //console.log("check for existen operator: Inconsistence detected: " + e);
+    }
     const operatorsCount = await wikidrone.methods.operatorsCount().call();
     assert.equal(operatorsCount, 1);
   });

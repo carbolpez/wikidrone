@@ -1,12 +1,12 @@
 <template>
 	<div>
 		<!--input v-on:input="onInput"/-->
-		<input @input="onInput"/>
+		<input @input="onInput" placeholder="Search automatically"/>
 
     <input class="new-todo"
       autofocus
       autocomplete="off"
-      placeholder="Search drone operations"
+      placeholder="Search and press enter"
       @keyup.enter="onInput">
 	</div>
 </template>

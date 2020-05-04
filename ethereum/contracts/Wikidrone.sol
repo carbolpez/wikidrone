@@ -1,9 +1,9 @@
-pragma solidity ^0.4.17;
+pragma solidity ^0.4.25;
 
 contract Wikidrone {
 
     struct Track {
-        uint id;
+        //uint id;
         address operator;
         string start;
         string finish;
@@ -36,6 +36,7 @@ contract Wikidrone {
     }
 
     function registerOperator() public {
+        require(!operators[msg.sender]);
         operators[msg.sender] = true;
         operatorsCount++;
     }

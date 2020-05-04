@@ -1,11 +1,12 @@
+const CONTRACT_ADDRESS = "0x3B5Ed160A51068E84C1daB7A78Bc2386B18d271C";
 
 const Web3 = require('web3');
 //const provider = ganache.provider();
 const web3 = new Web3('ws://127.0.0.1:7545');
+const INDEX_OPERATOR = 0;
 //const web3 = new Web3(provider);
 const Wikidrone = require('./build/Wikidrone.json');
 let accounts;
-const addr = '0xB75dF35AA2CddF2AAB87B4f2Da7e49Be319e2563';
 let pointA = {
   type: "Feature",
   geometry: {
@@ -30,7 +31,7 @@ let pointB = {
 
 const wikidrone = new web3.eth.Contract(
   JSON.parse(Wikidrone.interface),
-  addr
+  CONTRACT_ADDRESS
 );
 
 const load = async () => {
@@ -38,7 +39,7 @@ const load = async () => {
 
   accounts = await web3.eth.getAccounts();
   track = {
-    operator:accounts[0],
+    operator:accounts[INDEX_OPERATOR],
     start:JSON.stringify(pointA),
     finish:JSON.stringify(pointB),
     routePoints:JSON.stringify([pointA,pointB]),
@@ -46,7 +47,7 @@ const load = async () => {
     endTime:new Date().getTime(),
     minAltitude:0,
     maxAltitude:100,
-    description:'Test track 2',
+    description:'Test track 1',
     metadata:'2'
   }
 /*
@@ -67,7 +68,7 @@ txId = await wikidrone.methods.createTrack(
   track.maxAltitude,
   track.description,
   track.metadata
-).send({from: accounts[0], gas:'4700000'});
+).send({from: accounts[INDEX_OPERATOR], gas:'4700000'});
 const tracksCount = await wikidrone.methods.tracksCount().call();
 console.log("load --> tracksCount: " + tracksCount);
 };

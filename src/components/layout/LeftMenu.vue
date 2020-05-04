@@ -1,15 +1,18 @@
 <template>
-	<div class="col-md-2 border rounded">
+	<div v-if="visible" class="col-md-2 border rounded">
 		<ul class="list-group">
 			<li class="list-group-item"><router-link to="/operation">Operations</router-link></li>
-			<li class="list-group-item"><router-link to="/detail">Detail</router-link></li>
+			<li class="list-group-item"><router-link to="/register">Register</router-link></li>
 		</ul>
 	</div>
 </template>
 
 <script>
 	export default {
-	name: 'LeftMenu'
+		name: 'LeftMenu',
+		data() {
+			return { visible: true};
+		}
 	};
 </script>
 

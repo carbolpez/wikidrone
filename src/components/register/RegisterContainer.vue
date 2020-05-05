@@ -53,8 +53,8 @@
             <option v-for="account in this.getAccounts" :value="account" v-bind:key="account">{{ account }}</option>
           </select>
         </div>
-        <button type="button" class="btn btn-primary float-left" @click="listRegister">Volver</button>
-        <button type="button" class="btn btn-primary float-right" @click="sendRegister">Aceptar</button>
+        <button type="button" class="btn btn-outline-info float-left" @click="listRegister">Volver</button>
+        <button type="button" class="btn btn-outline-info float-right" @click="sendRegister">Aceptar</button>
       </div>
     </form>
   </div>

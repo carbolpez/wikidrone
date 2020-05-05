@@ -1,12 +1,15 @@
 <template>
-	<div class="col-md-9 border rounded">
+	<div class="col-md-8 border rounded">
 		<h4 class="titleContainer">Operation List</h4>
-		<SearchBar @termChange="findOperations"></SearchBar>
-	<ul class="list-group">
-		<OperationListItem 	v-for="operation in allTracks"	:operation="operation" :key="operation.metadata" @itemSelect="operationSelect">
-		</OperationListItem>
-	</ul>
-	<br>
+		<div class="w-50">
+			<SearchBar @termChange="findOperations"></SearchBar>
+			<ul class="list-group">
+				<OperationListItem 	v-for="operation in allTracks"	:operation="operation" :key="operation.metadata" @itemSelect="operationSelect">
+				</OperationListItem>
+			</ul>
+			<hr class="mt-3 mb-3">
+			<button type="button" class="btn btn-outline-info float-right" @click="newRegister">Nueva Operación</button>
+		</div>
 	</div>
 </template>
 
@@ -40,7 +43,10 @@ import { mapActions,mapGetters} from 'vuex';
 				operationSelect: function(operation){
 					//console.log("operationSelect --> " + operation);
 					router.push({name:'detail', params: {operation}});
-				}//operationSelect
+				},
+				newRegister: function(){
+					router.push({name:'operationNew'});
+				}
 		}//methods
 
 	};//export

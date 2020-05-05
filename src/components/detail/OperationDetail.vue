@@ -52,6 +52,7 @@ import GoogleMaps from '../map/GoogleMaps';
 margin-left:5px;
 margin-top:10px;
 margin-bottom:10px;
+height:300px;
 }
 label{
 margin-left:10px;

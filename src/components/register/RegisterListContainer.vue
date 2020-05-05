@@ -3,7 +3,7 @@
     <h4 class="titleContainer">Register List</h4>
     <div class="w-50">
     <SearchBar @termChange="searchRegisters"></SearchBar>
-    <table class="table table-bordered">
+    <table v-if="getRegisters.length>0" class="table table-bordered">
       <thead>
         <tr>
           <th scope="col">Address</th>

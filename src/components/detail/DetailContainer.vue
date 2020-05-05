@@ -1,8 +1,8 @@
 <template>
   <div class="col-md-9 border rounded">
-  <h4 class="titleContainer">Operation Details</h4>
-  <ImageList></ImageList>
-  <OperationDetail :operation="operation"></OperationDetail>
+    <h4 class="titleContainer">Operation Details</h4>
+    <ImageList></ImageList>
+    <OperationDetail :operation="operation"></OperationDetail>
   </div>
 </template>
 

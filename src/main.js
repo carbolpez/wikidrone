@@ -6,6 +6,7 @@ import OperationContainer from './components/operation/OperationContainer';
 import DetailContainer from './components/detail/DetailContainer';
 import RegisterContainer from './components/register/RegisterContainer';
 import RegisterListContainer from './components/register/RegisterListContainer';
+import OperationNewContainer from './components/operation/OperationNewContainer';
 
 Vue.use(VueRouter);
 //Si exportamos el objeto lo poemos importar en otro componente
@@ -13,10 +14,11 @@ export const router = new VueRouter({
   //browser router mode
   mode: 'history',
   routes: [
-    { path: '/operation', component: OperationContainer, props:true },
+    { name: 'operation', path: '/operation', component: OperationContainer, props:true },
     { name: 'detail', path: '/detail', component: DetailContainer, props:true },
     { name: 'register', path: '/register', component: RegisterListContainer, props:true },
-    { name: 'registerNew', path: '/registerNew', component: RegisterContainer, props:true }
+    { name: 'registerNew', path: '/registerNew', component: RegisterContainer, props:true },
+    { name: 'operationNew', path: '/operationNew', component: OperationNewContainer, props:true }
   ]
 })
 new Vue({

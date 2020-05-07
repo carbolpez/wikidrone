@@ -1,7 +1,7 @@
 <template>
   <div class="col-md-8 border rounded" id="mycontainer">
     <h4 class="titleContainer">New Operation</h4>
-    <ImageList></ImageList>
+    <!--ImageList></ImageList-->
     <OperationNewDetail></OperationNewDetail>
   </div>
 </template>
@@ -10,7 +10,7 @@
   import { mapActions, mapGetters} from 'vuex';
   import { router } from '../../main';
   import OperationNewDetail from '../operation/OperationNewDetail';
-  import ImageList from '../detail/ImageList';
+  //import ImageList from '../detail/ImageList';
   export default {
     name: 'OperationNewContainer',
     methods: {
@@ -27,7 +27,7 @@
 		},
     components: {
       OperationNewDetail,
-      ImageList
+      //ImageList
     },
   };
 </script>

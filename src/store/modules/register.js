@@ -30,7 +30,7 @@ const actions = {
     }
   },
   async findRegisters({commit}, searchTerm){
-    console.log('findRegisters --> searchTerm: ' + searchTerm);
+    //console.log('findRegisters --> searchTerm: ' + searchTerm);
     try{
           //Register Metadata
           const data = searchTerm;
@@ -39,11 +39,11 @@ const actions = {
           };
 
           let URL = configApp.configVars.CLOUD_URL + "/" + configApp.configVars.CONTEXT + "/" + configApp.configVars.FIND_REGISTERS_URI;
-          console.log("findRegisters --> URL: " + URL);
+          //console.log("findRegisters --> URL: " + URL);
 
           axios.post(URL, data, headers).then(function callback(response, err){
             if(!err){
-              console.log("findRegistersCallback --> response: " + JSON.stringify(response));
+              //console.log("findRegistersCallback --> response: " + JSON.stringify(response));
               commit('updateResult', response.data);
             }
             else{
@@ -93,7 +93,7 @@ const actions = {
   async setAccounts({commit}) {
     try {
       var accounts = await web3.eth.getAccounts();
-      console.log("setAccounts --> accounts: " + accounts);
+      //console.log("setAccounts --> accounts: " + accounts);
       commit('updateResult', null);
       commit('updateAccounts', accounts);
     }catch(exc){

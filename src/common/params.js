@@ -5,7 +5,7 @@ var configVars = {
   CONTEXT: "service",
   REGISTER_OPERATOR_URI: "registry/registerOperator",
   FIND_REGISTERS_URI: "registry/findRegisters",
-  CONTRACT_ADDRESS: "0x3B5Ed160A51068E84C1daB7A78Bc2386B18d271C",
+  CONTRACT_ADDRESS: "0x6a5D7d72D3031bAB003Bf5836746FC044e37f531",
   DEFAULT_CENTER_POINT: {
     "type": "Feature",
     "geometry": {

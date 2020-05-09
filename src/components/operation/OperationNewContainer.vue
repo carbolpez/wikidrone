@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-8 border rounded" id="mycontainer">
+  <div class="col-9" id="mycontainer">
     <h4 class="titleContainer">New Operation</h4>
     <!--ImageList></ImageList-->
     <OperationNewDetail></OperationNewDetail>

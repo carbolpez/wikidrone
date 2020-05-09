@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="col-md-9">
 	<ul class="list-group">
 	<!--Key mejora el rendimiento. Debe ser unico -->
 		<OperationListItem 	v-for="operation in operations"	:operation="operation" :key="operation.metadata">
@@ -26,7 +26,4 @@
 </script>
 
 <style>
-div{
-width: 80%;
-}
 </style>

@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
+  <div class="w-100">
   <h5 class="titleDetail">Nueva Operación</h5>
-  <div class="row border">
+  <div class="row w-100">
     <div v-if="errors.length>0" class="alert alert-danger w-100" role="alert">
       <b>Please correct the following error(s):</b>
       <ul>
@@ -14,12 +14,12 @@
     <div v-else-if="(getTrackResult !=null) && (getTrackResult.codRet==0)" class="alert alert-success w-100" role="alert">
       <b>Registro procesado correctamente {{getTrackResult}}</b>
     </div>
-    <div class="col-md-7 border content">
+    <div class="col-7 content">
       <GoogleMapsEmpty ref="googleMapsEmpty"></GoogleMapsEmpty>
     </div>
-    <div class="col-md-4 border content">
+    <div class="col-4 ml-5 content">
       <form>
-        <div class="container">
+        <div class="w-100">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">Descripción</span>
@@ -58,6 +58,7 @@
               <option v-for="account in this.getAccounts" :value="account" v-bind:key="account">{{ account }}</option>
             </select>
           </div>
+          <button type="button" class="btn btn-outline-info float-left" @click="listOperation">Cancelar</button>
           <button type="button" class="btn btn-outline-info float-right" @click="sendOperation">Aceptar</button>
         </div>
       </form>
@@ -69,6 +70,7 @@
 <script>
 import { mapActions, mapGetters} from 'vuex';
 import GoogleMapsEmpty from '../map/GoogleMapsEmpty';
+import { router } from '../../main';
   export default {
     name: 'OperationNewDetail',
     components: {GoogleMapsEmpty},
@@ -138,7 +140,10 @@ import GoogleMapsEmpty from '../map/GoogleMapsEmpty';
           }
 //            await this.registerOperatorMetadata(registerMetadata);
         }
-			}
+			},
+      listOperation: function() {
+        router.push({name:'operation'});
+      }
     },
     created: function () {
       this.setTrackResult(null);
@@ -156,6 +161,10 @@ height:400px;
 }
 label{
 margin-left:10px;
-font-size: 10px;
+font-size: 2px;
+}
+.input-group-text
+{
+  font-size: 10px;
 }
 </style>

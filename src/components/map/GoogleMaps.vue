@@ -20,14 +20,15 @@ export default {
       this.$refs["map"], {
       //center: {lat: startPoint.geometry.coordinates[1], lng:startPoint.geometry.coordinates[0]},
       center: startPoint,
-      zoom: 13
+      zoom: 15
     });
     //StartPoint
     //var latLng1 = new window.google.maps.LatLng(startPoint.geometry.coordinates[1],startPoint.geometry.coordinates[0]);
     var marker1 = new window.google.maps.Marker({
            position: startPoint,
            map: this.map,
-           title: 'Start Point'
+           title: 'Start Point',
+           icon: '/images/startPoint.png'
          });
 
     //Route Points
@@ -53,7 +54,8 @@ export default {
     var marker2 = new window.google.maps.Marker({
           position: endPoint,
           map: this.map,
-          title: 'Finish Point'
+          title: 'Finish Point',
+          icon: '/images/endPoint.png'
         });
     //Evitar error reportado de uso
     marker1;

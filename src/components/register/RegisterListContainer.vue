@@ -22,6 +22,7 @@
     </tbody>
   </table>
     <hr class="mt-3 mb-3">
+    <button type="button" class="btn btn-outline-info float-left" @click="sendHome">Volver</button>
     <button type="button" class="btn btn-outline-info float-right" @click="newRegister">Nuevo Registro</button>
     </div>
   </div>
@@ -61,9 +62,14 @@ import { router } from '../../main';
 				},
         newRegister: function(){
           router.push({name:'registerNew'});
+        },
+        sendHome: function(){
+          router.push({name:'landing'});
         }
-		}//methods
-
+		},
+    created: function () {
+      this.searchRegisters(null);
+    }
 	};//export
 </script>
 

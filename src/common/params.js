@@ -5,8 +5,8 @@ var configVars = {
   CONTEXT: "service",
   REGISTER_OPERATOR_URI: "registry/registerOperator",
   FIND_REGISTERS_URI: "registry/findRegisters",
-  CONTRACT_ADDRESS: "0x6a5D7d72D3031bAB003Bf5836746FC044e37f531",
-  DEFAULT_CENTER_POINT: {
+  CONTRACT_ADDRESS: "0xBD904C5D8671f9A45182048C0886E45c03e4d1f5",
+  /*DEFAULT_CENTER_POINT: {
     "type": "Feature",
     "geometry": {
       "type": "Point",
@@ -15,7 +15,8 @@ var configVars = {
     "properties": {
       "name": "Madrid"
     }
-  }
+  }*/
+  DEFAULT_CENTER_POINT: {"lat":40.52667317315881,"lng":-3.6261182582661533}
 };
 export default
 {

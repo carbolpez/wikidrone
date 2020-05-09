@@ -1,5 +1,5 @@
 <template>
-	<div class="col-md-8 border rounded">
+	<div class="col-9">
 		<h4 class="titleContainer">Operation List</h4>
 		<div class="w-50">
 			<SearchBar @termChange="findOperations"></SearchBar>
@@ -8,6 +8,7 @@
 				</OperationListItem>
 			</ul>
 			<hr class="mt-3 mb-3">
+			<button type="button" class="btn btn-outline-info float-left" @click="sendHome">Volver</button>
 			<button type="button" class="btn btn-outline-info float-right" @click="newRegister">Nueva Operación</button>
 		</div>
 	</div>
@@ -46,8 +47,14 @@ import { mapActions,mapGetters} from 'vuex';
 				},
 				newRegister: function(){
 					router.push({name:'operationNew'});
+				},
+				sendHome: function(){
+					router.push({name:'landing'});
 				}
-		}//methods
+		},
+		created: function () {
+			this.findOperations(null);
+		}
 
 	};//export
 </script>

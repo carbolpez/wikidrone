@@ -1,8 +1,11 @@
 
 import wikidrone from '../../../ethereum/wikidrone' ;
+import axios from 'axios';
+import configApp from '../../common/params';
 const state = {
   tracks: [],
-  result: null
+  result: null,
+  images: []
 };
 
 const getters = {
@@ -26,6 +29,7 @@ const actions = {
     commit('updateTracks', newTracks);
   },
   async newTrack({commit}, track) {
+    try{
       console.log('newTrack -->  track: ' + JSON.stringify(track));
       var txId = await wikidrone.methods.createTrack(
         track.account,
@@ -44,7 +48,39 @@ const actions = {
       console.log('newTrack --> tracksCount: ' + tracksCount);
       commit('updateTrackResult', {codRet:0});
       return 0;
+    } catch (exc) {
+    console.log("newTrack --> exc:" + exc);
+    commit('updateTrackResult', {codRet:1,errorMessage:exc.message})
+    return 1;
+    }
   },
+  async uploadImages ({commit},images) {
+    console.log("uploadImages --> Iniciando");
+    for(var image in images){
+      //Tenemos que tomar el file, solo tenemos su referencia al disco. FomrData es objete de especificación javascript
+      const formData = new FormData();
+      formData.append('image', image);
+      const URL = configApp.configVars.CLOUD_URL + "/" + configApp.configVars.SEND_OPERATION_IMAGES_URI;
+      const headers = {
+        "Content-Type": "application/json"
+      };
+      axios.post(URL, formData, headers).then(function callback(response, err){
+        if(!err){
+          //console.log("findRegistersCallback --> response: " + JSON.stringify(response));
+          commit('updateTrackResult', response.data);
+        }
+        else{
+          console.log("uploadImages --> error: " + err);
+          commit('updateTrackResult', {codRet:1,errorMessage:err});
+        }
+      }).catch(function callback(e){
+        console.log("uploadImages --> e: " + e);
+        commit('updateTrackResult', {codRet:1,errorMessage:e})
+      });
+    }
+    return 0;
+  },
+
   async setTrackResult({commit}, result) {
       commit('updateTrackResult', result);
   }

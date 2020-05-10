@@ -103,6 +103,8 @@ const actions = {
   },
   async resetResult({commit}) {
       commit('updateResult', null);
+  },
+  async uploadImages() {
   }
 };
 

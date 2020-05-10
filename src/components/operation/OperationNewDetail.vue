@@ -1,6 +1,4 @@
 <template>
-  <div class="w-100">
-  <h5 class="titleDetail">Nueva Operación</h5>
   <div class="row w-100">
     <div v-if="errors.length>0" class="alert alert-danger w-100" role="alert">
       <b>Please correct the following error(s):</b>
@@ -13,6 +11,9 @@
     </div>
     <div v-else-if="(getTrackResult !=null) && (getTrackResult.codRet==0)" class="alert alert-success w-100" role="alert">
       <b>Registro procesado correctamente {{getTrackResult}}</b>
+    </div>
+    <div class="w-100">
+      <UploadForm ref="uploadForm"></UploadForm>
     </div>
     <div class="col-7 content">
       <GoogleMapsEmpty ref="googleMapsEmpty"></GoogleMapsEmpty>
@@ -44,7 +45,7 @@
             </div>
             <input type="text" class="form-control" placeholder="dd/mm/yyyy HH:mi:ss" aria-label="Start time" aria-describedby="basic-addon1" id="startTime" v-model="startTime">
           </div>
-          <div class="input-group mb-3">
+          <div class="input-group date mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">End Time</span>
             </div>
@@ -64,16 +65,16 @@
       </form>
     </div>
   </div>
-  </div>
 </template>
 
 <script>
 import { mapActions, mapGetters} from 'vuex';
 import GoogleMapsEmpty from '../map/GoogleMapsEmpty';
+import UploadForm from '../image/UploadForm';
 import { router } from '../../main';
   export default {
     name: 'OperationNewDetail',
-    components: {GoogleMapsEmpty},
+    components: {GoogleMapsEmpty,UploadForm},
     computed: {...mapGetters(['getTrackResult','getAccounts'])},
     data() {
       return {
@@ -87,7 +88,7 @@ import { router } from '../../main';
       };
     },
     methods: {
-      ...mapActions(['newTrack','setAccounts','setTrackResult']),
+      ...mapActions(['newTrack','setAccounts','setTrackResult','uploadImages']),
       sendOperation: async function() {
         this.errors = [];
         if (!this.description) {
@@ -96,14 +97,26 @@ import { router } from '../../main';
         if (!this.minAltitude) {
           this.errors.push('Altitud mínima obligatoria');
         }
+        else if(isNaN(this.minAltitude)){
+          this.errors.push('Altitud mínima obligatoria. Debe ser un número');
+        }
         if (!this.maxAltitude) {
           this.errors.push('Altitud máxima obligatoria');
         }
+        else if(isNaN(this.maxAltitude)){
+          this.errors.push('Altitud máxima obligatoria. Debe ser un número');
+        }
         if (!this.startTime) {
-          this.errors.push('Instante de comienzo obligatoria');
+          this.errors.push('Instante de comienzo obligatorio');
+        }
+        else if (isNaN(new Date(this.startTime).getTime())){
+          this.errors.push('Instante de comienzo obligatorio. Revise formato dd/mm/yyyy HH:mi:ss');
         }
         if (!this.endTime) {
           this.errors.push('Instante de finalización obligatorio');
+        }
+        else if (isNaN(new Date(this.startTime).getTime())){
+          this.errors.push('Instante de finalización obligatorio. Revise formato dd/mm/yyyy HH:mi:ss');
         }
         if (!this.account) {
           this.errors.push('Cuenta wikidrone obligatoria.');
@@ -117,6 +130,8 @@ import { router } from '../../main';
         if (!(this.$refs.googleMapsEmpty.$data.routePoints) || (this.$refs.googleMapsEmpty.$data.routePoints.length == 0)) {
           this.errors.push('Puntos de ruta. Es necesario dibujar una ruta en el mapa de al menos tres puntos');
         }
+
+
         if (this.errors.length==0){
           //TODO: emitir evento
           var operation={};
@@ -124,8 +139,8 @@ import { router } from '../../main';
           operation.description=this.description;
           operation.minAltitude=this.minAltitude;
           operation.maxAltitude=this.maxAltitude;
-          operation.startTime=this.startTime;
-          operation.endTime=this.endTime;
+          operation.startTime=new Date(this.startTime).getTime();
+          operation.endTime=new Date(this.endTime).getTime();
           operation.account=this.account;
           operation.start=this.$refs.googleMapsEmpty.$data.start;
           operation.finish=this.$refs.googleMapsEmpty.$data.finish;
@@ -136,9 +151,9 @@ import { router } from '../../main';
           var codRet = await this.newTrack(operation);
           if (codRet == 0){
             console.log("operation registered");
+            await this.uploadImages(this.$refs.uploadForm.$data.images);
             //this.setTrackResult({codRet:0});
           }
-//            await this.registerOperatorMetadata(registerMetadata);
         }
 			},
       listOperation: function() {

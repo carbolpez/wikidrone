@@ -1,6 +1,7 @@
 <template>
 	<div class="col-9">
 		<h4 class="titleContainer">Operation List</h4>
+		<p class="text-justify">List of Flight Operations registered in smartcontract Wikidrone.sol for Ethereum blockchain distributed database. To create a new operation click on "New Operation". It is necessary to use an Ethereum User Address that has been registered in the smartcontract as an authorized operator. Clicking on the list will open a view with the detail of the registered operation where you can consult the flight coordinates stored in a distributed blockchain database</p>
 		<div class="w-50">
 			<!--
 			<SearchBar @termChange="findOperations"></SearchBar>

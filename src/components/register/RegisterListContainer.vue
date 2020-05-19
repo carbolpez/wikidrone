@@ -1,6 +1,7 @@
 <template>
   <div class="col-md-8 border rounded" id="registerListContainer">
     <h4 class="titleContainer">Register List</h4>
+    <p class="text-justify">List of operators registered in the Wikidrone system. To register a new operator click on "New Operator". The registry will store the selected address within the SmartContract authorized operators list and will also store the associated metadata in the centralized database.</p>
     <div class="w-50">
       <!--
     <SearchBar @termChange="searchRegisters"></SearchBar>

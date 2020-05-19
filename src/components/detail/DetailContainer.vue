@@ -14,7 +14,7 @@
   import OperationDetail from './OperationDetail';
   import ImageList from './ImageList';
   import { router } from '../../main';
-  import { mapGetters} from 'vuex';
+  import { mapGetters, mapActions} from 'vuex';
   export default {
     name: 'DetailContainer',
     props: ['operation'],
@@ -25,9 +25,16 @@
     methods: {
       listOperation: function() {
         router.push({name:'operation'});
-      }
+      },
+      ...mapActions(['setTrackResult'])
     },
-    computed: {...mapGetters(['getTrackResult'])}
+    computed: {...mapGetters(['getTrackResult'])},
+    created: function () {
+      this.setTrackResult(null);
+    },
+    activated: function() {
+      this.setTrackResult(null);
+    }
   };
 </script>
 

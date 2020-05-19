@@ -31,7 +31,7 @@
 img {
   padding: 5px;
   margin:5px;
-  opacity: 0.5;
+  opacity: 1;
   max-width: 200px;
 }
 </style>

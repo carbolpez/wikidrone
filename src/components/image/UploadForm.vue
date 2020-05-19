@@ -7,16 +7,19 @@
 </template>
 
 <script>
-
+  'use strict';
   export default {
    name: 'UploadForm',
    methods: {
      setFile: function() {
-     console.log('setFile --> files: ' + this.$refs.inputFile.files[0]);
+     console.log('setFile --> files[0]: ' + this.$refs.inputFile.files[0].name);
+     console.log('setFile --> files.length: ' + this.$refs.inputFile.files.length);
      this.image = this.$refs.inputFile.files[0];
      this.images = [];
-     for(var img in this.$refs.inputFile.files)
-      this.images.push(img);
+     for(var i=0;i<this.$refs.inputFile.files.length;i++){
+        console.log("setFile --> inputFile[" + i + "].name: " + this.$refs.inputFile.files[i].name);
+      }
+      this.images = this.$refs.inputFile.files;
        //this.$emit('change', this.$refs.inputFile.files[0]);
      }
   },

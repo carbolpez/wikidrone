@@ -1,8 +1,8 @@
 <template>
 	<div v-if="visible" class="col-2 border rounded">
 		<ul class="list-group">
-			<li class="list-group-item"><router-link to="/operation">Operations</router-link></li>
 			<li class="list-group-item"><router-link to="/register">Register</router-link></li>
+			<li class="list-group-item"><router-link to="/operation">Operations</router-link></li>
 		</ul>
 	</div>
 </template>

@@ -70,7 +70,7 @@ const actions = {
             if(!err){
               //console.log("findRegistersCallback --> response: " + JSON.stringify(response));
               commit('updateImages', response.data);
-              commit('updateTrackResult', {retCode:0})
+              //commit('updateTrackResult', {retCode:0})
             }
             else{
               console.log("fetchImages --> error: " + err);
@@ -120,8 +120,9 @@ const actions = {
     //Tenemos que tomar el file, solo tenemos su referencia al disco. FomrData es objete de especificación javascript
     const formData = new FormData();
     formData.append('metadata', imagesUpload.metadata);
-    for(var imageUpload in imagesUpload.images){
-      formData.append('images', imageUpload);
+    for(var i=0; i<imagesUpload.images.length;i++){
+      console.log("uploadImages --> imagesUpload[" + i + "]: " + imagesUpload.images[i].name);
+      formData.append('images', imagesUpload.images[i]);
     }
     const headers = {
       "Content-Type": "multipart/form-data"
@@ -130,7 +131,7 @@ const actions = {
     axios.post(URL, formData, headers).then(function callback(response, err){
       if(!err){
         //console.log("findRegistersCallback --> response: " + JSON.stringify(response));
-        commit('updateTrackResult', response.data.result);
+        commit('updateTrackResult', response.data);
       }
       else{
         console.log("uploadImages --> error: " + err);

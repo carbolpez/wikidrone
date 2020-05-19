@@ -9,7 +9,7 @@ var configVars = {
   SEND_OPERATION_IMAGES_URI: "track/addTrackImages",
   FETCH_IMAGELIST_URI: "track/getImageList",
   GET_IMAGE_URI: "track/getImage",
-  CONTRACT_ADDRESS: "0xb005fa0B53c797e41A16d0543305e3686d9069d4",
+  CONTRACT_ADDRESS: "0xb933EFc9A575167789975a8Eed0CC3b51ac671E1",
   /*DEFAULT_CENTER_POINT: {
     "type": "Feature",
     "geometry": {

@@ -1,5 +1,5 @@
 <template>
-  <div class="image-container">
+  <div class="image-container w-100">
         <img 	v-for="image in getImageList"	:key="image._id" class="border border-warning" :src="getImageURI(image._id)"/>
   </div>
 </template>
@@ -27,14 +27,11 @@
 </script>
 
 <style scoped>
-.image-container {
-  column-count: 3;
-  column-gap: 0;
-}
 
 img {
   padding: 5px;
-  margin:20px;
+  margin:5px;
   opacity: 0.5;
+  max-width: 200px;
 }
 </style>

@@ -158,25 +158,20 @@ import { router } from '../../main';
           if (codRet == 0){
             console.log("operation registered. auxMetadata: " + auxMetadata);
 
+/*
             var imageUpload = {};
             imageUpload.image = this.$refs.uploadForm.$data.image;
             imageUpload.metadata = auxMetadata;
             await this.uploadImage(imageUpload);
+*/
 
 
-            /*
             var imagesUpload = {};
-            imagesUpload.metadata = '';
-            imagesUpload.images = [];
-            for (var aux in this.$refs.uploadForm.$data.images){
-              imagesUpload.images.push(aux);
-            }
-            console.log("sendOperation--> this.$refs.uploadForm.$data.images: " + this.$refs.uploadForm.$data.images.length);
-            console.log("sendOperation--> imagesUpload.images.length: " + imagesUpload.images.length);
             imagesUpload.metadata = auxMetadata;
+            imagesUpload.images = this.$refs.uploadForm.$refs.inputFile.files;
+            console.log("sendOperation--> this.$refs.uploadForm.$refs.inputFile.files.length: " + this.$refs.uploadForm.$refs.inputFile.files.length);
             console.log("sendOperation--> imagesUpload.metadata: " + imagesUpload.metadata);
             await this.uploadImages(imagesUpload);
-            */
           }
         }
 			},
@@ -189,7 +184,11 @@ import { router } from '../../main';
         this.uploadImage(data);
       }
     },
-    mounted: function () {
+    created: function () {
+      this.setTrackResult(null);
+      this.setAccounts();
+    },
+    activated: function() {
       this.setTrackResult(null);
       this.setAccounts();
     }

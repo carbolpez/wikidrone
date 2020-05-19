@@ -1,7 +1,10 @@
 <template>
   <div class="col-md-9 border rounded">
     <h4 class="titleContainer">Operation Details</h4>
-    <ImageList></ImageList>
+    <div v-if="(getTrackResult !=null) && (getTrackResult.retCode != 0)" class="alert alert-danger w-100" role="alert">
+      <b>Problemas procesando registro: {{getTrackResult}}</b>
+    </div>
+    <ImageList :metadata="operation.metadata"></ImageList>
     <OperationDetail :operation="operation"></OperationDetail>
     <button type="button" class="btn btn-outline-info float-left" @click="listOperation">Volver</button>
   </div>
@@ -11,6 +14,7 @@
   import OperationDetail from './OperationDetail';
   import ImageList from './ImageList';
   import { router } from '../../main';
+  import { mapGetters} from 'vuex';
   export default {
     name: 'DetailContainer',
     props: ['operation'],
@@ -22,7 +26,8 @@
       listOperation: function() {
         router.push({name:'operation'});
       }
-    }
+    },
+    computed: {...mapGetters(['getTrackResult'])}
   };
 </script>
 

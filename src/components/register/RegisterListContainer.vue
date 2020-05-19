@@ -2,7 +2,9 @@
   <div class="col-md-8 border rounded" id="registerListContainer">
     <h4 class="titleContainer">Register List</h4>
     <div class="w-50">
+      <!--
     <SearchBar @termChange="searchRegisters"></SearchBar>
+  -->
     <table v-if="getRegisters.length>0" class="table table-bordered">
       <thead>
         <tr>
@@ -29,7 +31,7 @@
 </template>
 
 <script>
-import SearchBar from '../search/SearchBar';
+//import SearchBar from '../search/SearchBar';
 //import { router } from '../../main';
 
 import RegisterListItem from './RegisterListItem';
@@ -38,7 +40,7 @@ import { router } from '../../main';
 	export default {
 		name: 'RegisterContainer',
 		components: {
-			SearchBar,
+			//SearchBar,
 			//OperationList
 			RegisterListItem
 		},

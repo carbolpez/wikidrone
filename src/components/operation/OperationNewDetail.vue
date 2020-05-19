@@ -6,14 +6,17 @@
         <li v-for="error in this.errors" v-bind:key="error">{{ error }}</li>
       </ul>
     </div>
-    <div v-if="(getTrackResult !=null) && (getTrackResult.codRet != 0)" class="alert alert-danger w-100" role="alert">
+    <div v-if="(getTrackResult !=null) && (getTrackResult.retCode != 0)" class="alert alert-danger w-100" role="alert">
       <b>Problemas procesando registro: {{getTrackResult}}</b>
     </div>
-    <div v-else-if="(getTrackResult !=null) && (getTrackResult.codRet==0)" class="alert alert-success w-100" role="alert">
-      <b>Registro procesado correctamente {{getTrackResult}}</b>
+    <div v-else-if="(getTrackResult !=null) && (getTrackResult.retCode==0)" class="alert alert-success w-100" role="alert">
+      <b>Registro procesado correctamente {{getTrackResult.retCode}}</b>
     </div>
     <div class="w-100">
-      <UploadForm ref="uploadForm"></UploadForm>
+      <UploadForm ref="uploadForm" @change="addFile"></UploadForm>
+    </div>
+    <div class="w-100">
+      <ImageList ref="imageList" v-bind:images="this.images"></ImageList>
     </div>
     <div class="col-7 content">
       <GoogleMapsEmpty ref="googleMapsEmpty"></GoogleMapsEmpty>
@@ -71,10 +74,11 @@
 import { mapActions, mapGetters} from 'vuex';
 import GoogleMapsEmpty from '../map/GoogleMapsEmpty';
 import UploadForm from '../image/UploadForm';
+import ImageList from '../detail/ImageList';
 import { router } from '../../main';
   export default {
     name: 'OperationNewDetail',
-    components: {GoogleMapsEmpty,UploadForm},
+    components: {GoogleMapsEmpty,UploadForm, ImageList},
     computed: {...mapGetters(['getTrackResult','getAccounts'])},
     data() {
       return {
@@ -84,11 +88,12 @@ import { router } from '../../main';
         maxAltitude: null,
         startTime: null,
         endTime: null,
-        account: null
+        account: null,
+        images: []
       };
     },
     methods: {
-      ...mapActions(['newTrack','setAccounts','setTrackResult','uploadImages']),
+      ...mapActions(['newTrack','setAccounts','setTrackResult','uploadImage','uploadImages']),
       sendOperation: async function() {
         this.errors = [];
         if (!this.description) {
@@ -146,21 +151,45 @@ import { router } from '../../main';
           operation.finish=this.$refs.googleMapsEmpty.$data.finish;
           operation.routePoints=this.$refs.googleMapsEmpty.$data.routePoints;
           //TODO: Revisar la información de metadatos
-          operation.metadata= "" + new Date().getTime();
+          var auxMetadata = "" + new Date().getTime();
+          operation.metadata= auxMetadata;
           console.log("sendOperation --> operation: " + JSON.stringify(operation));
           var codRet = await this.newTrack(operation);
           if (codRet == 0){
-            console.log("operation registered");
-            await this.uploadImages(this.$refs.uploadForm.$data.images);
-            //this.setTrackResult({codRet:0});
+            console.log("operation registered. auxMetadata: " + auxMetadata);
+
+            var imageUpload = {};
+            imageUpload.image = this.$refs.uploadForm.$data.image;
+            imageUpload.metadata = auxMetadata;
+            await this.uploadImage(imageUpload);
+
+
+            /*
+            var imagesUpload = {};
+            imagesUpload.metadata = '';
+            imagesUpload.images = [];
+            for (var aux in this.$refs.uploadForm.$data.images){
+              imagesUpload.images.push(aux);
+            }
+            console.log("sendOperation--> this.$refs.uploadForm.$data.images: " + this.$refs.uploadForm.$data.images.length);
+            console.log("sendOperation--> imagesUpload.images.length: " + imagesUpload.images.length);
+            imagesUpload.metadata = auxMetadata;
+            console.log("sendOperation--> imagesUpload.metadata: " + imagesUpload.metadata);
+            await this.uploadImages(imagesUpload);
+            */
           }
         }
 			},
       listOperation: function() {
         router.push({name:'operation'});
+      },
+      addFile: function(data) {
+        console.log("addFile --> data: " + JSON.stringify(data));
+        this.images = data;
+        this.uploadImage(data);
       }
     },
-    created: function () {
+    mounted: function () {
       this.setTrackResult(null);
       this.setAccounts();
     }

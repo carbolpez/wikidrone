@@ -5,8 +5,11 @@ var configVars = {
   CONTEXT: "service",
   REGISTER_OPERATOR_URI: "registry/registerOperator",
   FIND_REGISTERS_URI: "registry/findRegisters",
-  SEND_OPERATION_IMAGES_URI: "track/uploadImages",
-  CONTRACT_ADDRESS: "0xBD904C5D8671f9A45182048C0886E45c03e4d1f5",
+  SEND_OPERATION_IMAGE_URI: "track/addTrackImage",
+  SEND_OPERATION_IMAGES_URI: "track/addTrackImages",
+  FETCH_IMAGELIST_URI: "track/getImageList",
+  GET_IMAGE_URI: "track/getImage",
+  CONTRACT_ADDRESS: "0xb005fa0B53c797e41A16d0543305e3686d9069d4",
   /*DEFAULT_CENTER_POINT: {
     "type": "Feature",
     "geometry": {

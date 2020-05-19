@@ -5,12 +5,13 @@ import configApp from '../../common/params';
 const state = {
   tracks: [],
   result: null,
-  images: []
+  imageList: []
 };
 
 const getters = {
   allTracks: state => state.tracks,
-  getTrackResult: state => state.result
+  getTrackResult: state => state.result,
+  getImageList: state => state.imageList
 };
 
 const actions = {
@@ -46,41 +47,101 @@ const actions = {
       const tracksCount = await wikidrone.methods.tracksCount().call();
       console.log('newTrack --> Registro procesado correctamente. txId: ' + txId);
       console.log('newTrack --> tracksCount: ' + tracksCount);
-      commit('updateTrackResult', {codRet:0});
+      commit('updateTrackResult', {retCode:0});
       return 0;
     } catch (exc) {
     console.log("newTrack --> exc:" + exc);
-    commit('updateTrackResult', {codRet:1,errorMessage:exc.message})
+    commit('updateTrackResult', {retCode:1,errorMessage:exc.message})
     return 1;
     }
   },
-  async uploadImages ({commit},images) {
-    console.log("uploadImages --> Iniciando");
-    for(var image in images){
+  async fetchImages({commit}, metadata) {
+    try{
+          //Register Metadata
+          const data = {metadata: metadata};
+          const headers = {
+            "Content-Type": "application/json"
+          };
+
+          let URL = configApp.configVars.CLOUD_URL + "/" + configApp.configVars.CONTEXT + "/" + configApp.configVars.FETCH_IMAGELIST_URI;
+          //console.log("findRegisters --> URL: " + URL);
+
+          axios.post(URL, data, headers).then(function callback(response, err){
+            if(!err){
+              //console.log("findRegistersCallback --> response: " + JSON.stringify(response));
+              commit('updateImages', response.data);
+              commit('updateTrackResult', {retCode:0})
+            }
+            else{
+              console.log("fetchImages --> error: " + err);
+              commit('updateTrackResult', {retCode:1,errorMessage:err});
+            }
+          }).catch(function callback(e){
+            console.log("fetchImages --> e: " + e);
+            commit('updateTrackResult', {retCode:1,errorMessage:e})
+          });
+    }
+    catch(exc){
+      console.log("fetchImages --> exc:" + exc);
+      commit('updateTrackResult', {retCode:1,errorMessage:exc});
+    }
+  },
+  async uploadImage ({commit},imageUpload) {
+    console.log("uploadImage --> Iniciando. imageUpload.metadata: " + imageUpload.metadata);
       //Tenemos que tomar el file, solo tenemos su referencia al disco. FomrData es objete de especificación javascript
       const formData = new FormData();
-      formData.append('image', image);
-      const URL = configApp.configVars.CLOUD_URL + "/" + configApp.configVars.SEND_OPERATION_IMAGES_URI;
+      formData.append('metadata', imageUpload.metadata);
+      formData.append('image', imageUpload.image);
+      const URL = configApp.configVars.CLOUD_URL + "/" + configApp.configVars.CONTEXT + "/" + configApp.configVars.SEND_OPERATION_IMAGE_URI;
+      //const URL = configApp.configVars.CLOUD_URL + "/services/upload";
+      URL;
       const headers = {
-        "Content-Type": "application/json"
+        "Content-Type": "multipart/form-data"
       };
+      //TODO: OJOOOOOOOOOOOOOOOOOOOOo upload no URL
       axios.post(URL, formData, headers).then(function callback(response, err){
         if(!err){
           //console.log("findRegistersCallback --> response: " + JSON.stringify(response));
           commit('updateTrackResult', response.data);
         }
         else{
-          console.log("uploadImages --> error: " + err);
-          commit('updateTrackResult', {codRet:1,errorMessage:err});
+          console.log("uploadImage --> error: " + err);
+          commit('updateTrackResult', {retCode:1,errorMessage:err});
         }
       }).catch(function callback(e){
-        console.log("uploadImages --> e: " + e);
-        commit('updateTrackResult', {codRet:1,errorMessage:e})
+        console.log("uploadImage --> e: " + e);
+        commit('updateTrackResult', {retCode:1,errorMessage:e})
       });
-    }
-    return 0;
   },
+  async uploadImages ({commit},imagesUpload) {
+    console.log("uploadImages --> imagesUpload.metadata: " + imagesUpload.metadata);
+    console.log("uploadImages --> imagesUpload.images.length: " + imagesUpload.images.length);
+    const URL = configApp.configVars.CLOUD_URL + "/" + configApp.configVars.CONTEXT + "/" + configApp.configVars.SEND_OPERATION_IMAGES_URI;
+    //Tenemos que tomar el file, solo tenemos su referencia al disco. FomrData es objete de especificación javascript
+    const formData = new FormData();
+    formData.append('metadata', imagesUpload.metadata);
+    for(var imageUpload in imagesUpload.images){
+      formData.append('images', imageUpload);
+    }
+    const headers = {
+      "Content-Type": "multipart/form-data"
+    };
 
+    axios.post(URL, formData, headers).then(function callback(response, err){
+      if(!err){
+        //console.log("findRegistersCallback --> response: " + JSON.stringify(response));
+        commit('updateTrackResult', response.data.result);
+      }
+      else{
+        console.log("uploadImages --> error: " + err);
+        commit('updateTrackResult', {retCode:1,errorMessage:err});
+      }
+    }).catch(function callback(e){
+      console.log("uploadImages --> e: " + e);
+      commit('updateTrackResult', {retCode:1,errorMessage:e})
+    });
+
+  },
   async setTrackResult({commit}, result) {
       commit('updateTrackResult', result);
   }
@@ -100,6 +161,17 @@ const mutations = {
     }
     else {
       state.result = null;
+    }
+  },
+  updateImages: ({rootState},result) => {
+    rootState;
+    if (result != null){
+      console.log("updateImages --> result: " + JSON.stringify(result));
+      state.imageList = result;
+      //state.registers = result.operatorMetadata;
+    }
+    else {
+      state.imageList = null;
     }
   }
 };

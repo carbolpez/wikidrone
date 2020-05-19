@@ -1,7 +1,7 @@
 <template>
   <div class="dropper">
   <!-- $event.target.files $event le dice a view que viene del change envent. Podemos manejar el evento antes de pasarlo a la funcion vue-->
-    <input type="file" @change="setFile($event)" multiple accept="image/*" />
+    <input type="file" @change="setFile" id="inputFile" ref="inputFile" multiple/>
     <span>Arrastra aquí las imágenes de la operación de vuelo</span>
   </div>
 </template>
@@ -11,13 +11,18 @@
   export default {
    name: 'UploadForm',
    methods: {
-     setFile: function(files) {
-       console.log('setFile --> files: ' + JSON.stringify(event));
-       this.images = files;
+     setFile: function() {
+     console.log('setFile --> files: ' + this.$refs.inputFile.files[0]);
+     this.image = this.$refs.inputFile.files[0];
+     this.images = [];
+     for(var img in this.$refs.inputFile.files)
+      this.images.push(img);
+       //this.$emit('change', this.$refs.inputFile.files[0]);
      }
   },
    data() {
      return {
+       image: '',
        images: []
      };
    }
@@ -42,7 +47,7 @@ input {
   width: 100%;
   height: 15vh;
   position: absolute;
-  opacity: 0;
+/*  opacity: 0;*/
 }
 span{
   color: grey;

@@ -2,7 +2,9 @@
 	<div class="col-9">
 		<h4 class="titleContainer">Operation List</h4>
 		<div class="w-50">
+			<!--
 			<SearchBar @termChange="findOperations"></SearchBar>
+		-->
 			<ul class="list-group">
 				<OperationListItem 	v-for="operation in allTracks"	:operation="operation" :key="operation.metadata" @itemSelect="operationSelect">
 				</OperationListItem>
@@ -15,7 +17,7 @@
 </template>
 
 <script>
-import SearchBar from '../search/SearchBar';
+//import SearchBar from '../search/SearchBar';
 import { router } from '../../main';
 //import OperationList from './OperationList';
 import OperationListItem from './OperationListItem';
@@ -23,7 +25,7 @@ import { mapActions,mapGetters} from 'vuex';
 	export default {
 		name: 'OperationContainer',
 		components: {
-			SearchBar,
+	//		SearchBar,
 			//OperationList
 			OperationListItem
 		},

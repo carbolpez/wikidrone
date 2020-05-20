@@ -35,11 +35,29 @@ contract Wikidrone {
         _;
     }
 
+    modifier protected() {
+        require(manager == msg.sender);
+        _;
+    }
+
+    function resetOperator(address opAddress) public protected{
+        require(manager == msg.sender);
+        delete operators[opAddress];
+        if (operatorsCount>0)
+          operatorsCount--;
+    }
+
+    function resetTracks() public protected{
+        delete tracks;
+        delete tracksCount;
+    }
+
     function registerOperator() public {
         require(!operators[msg.sender]);
         operators[msg.sender] = true;
         operatorsCount++;
     }
+
 
     function createTrack(address operator,string start,string finish,string routePoints, uint startTime,uint endTime,
       int32 minAltitude,int32 maxAltitude,string description,string metadata) public restricted{

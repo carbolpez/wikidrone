@@ -8,6 +8,7 @@ import RegisterContainer from './components/register/RegisterContainer';
 import RegisterListContainer from './components/register/RegisterListContainer';
 import OperationNewContainer from './components/operation/OperationNewContainer';
 import Landing from './components/layout/Landing';
+import AdminContainer from './components/admin/AdminContainer';
 
 Vue.use(VueRouter);
 //Si exportamos el objeto lo poemos importar en otro componente
@@ -20,7 +21,8 @@ export const router = new VueRouter({
     { name: 'detail', path: '/detail', component: DetailContainer, props:true },
     { name: 'register', path: '/register', component: RegisterListContainer, props:true },
     { name: 'registerNew', path: '/registerNew', component: RegisterContainer, props:true },
-    { name: 'operationNew', path: '/operationNew', component: OperationNewContainer, props:true }
+    { name: 'operationNew', path: '/operationNew', component: OperationNewContainer, props:true },
+    { name: 'administration', path: '/admin', component: AdminContainer, props:true }
   ]
 })
 new Vue({

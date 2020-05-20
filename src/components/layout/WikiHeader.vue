@@ -1,6 +1,6 @@
 <template>
 	<div class="position-left row border rounded" id="divHeader">
-		<div class="col-4 logo"><img class="float-left" src="images/wikidrone.png"/></div>
+		<div class="col-4 logo"><img class="float-left" src="images/logo.png"/></div>
 		<div class="col-8 float-left text-left"><h4 class="float-left">Secure Distributed flight operations for drones</h4></div>
 	</div>
 </template>
@@ -27,5 +27,8 @@ h4{
 	color:orange;
 	vertical-align:middle;
 	font-style:italic;
+}
+img{
+	height: 100px;
 }
 </style>

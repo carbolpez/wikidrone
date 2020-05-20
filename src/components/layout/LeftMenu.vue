@@ -3,6 +3,7 @@
 		<ul class="list-group">
 			<li class="list-group-item"><router-link to="/register">Register</router-link></li>
 			<li class="list-group-item"><router-link to="/operation">Operations</router-link></li>
+			<li class="list-group-item"><router-link to="/admin">Administration</router-link></li>
 		</ul>
 	</div>
 </template>

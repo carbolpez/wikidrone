@@ -79,6 +79,6 @@ export default {
   width: 100%;
   height:100%;
   background: white;
-  position: absolute;
+  /*position: absolute;*/
 }
 </style>

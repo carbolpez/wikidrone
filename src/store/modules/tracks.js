@@ -5,13 +5,17 @@ import configApp from '../../common/params';
 const state = {
   tracks: [],
   result: null,
-  imageList: []
+  imageList: [],
+  operatorsCount:0,
+  tracksCount: 0
 };
 
 const getters = {
   allTracks: state => state.tracks,
   getTrackResult: state => state.result,
-  getImageList: state => state.imageList
+  getImageList: state => state.imageList,
+  getTracksCount: state=> state.tracksCount,
+  getOperatorsCount: state=> state.operatorsCount
 };
 
 const actions = {
@@ -145,6 +149,25 @@ const actions = {
   },
   async setTrackResult({commit}, result) {
       commit('updateTrackResult', result);
+  },
+  async initContractSummary({commit}) {
+    try{
+      console.log('initContractSummary --> Iniciando...');
+      const tracksCount = await wikidrone.methods.tracksCount().call();
+      const operatorsCount = await wikidrone.methods.operatorsCount().call();
+      console.log('initContractSummary --> tracksCount: ' + tracksCount);
+      console.log('initContractSummary --> operatorsCount: ' + operatorsCount);
+      var valores = {};
+      valores.tc = tracksCount;
+      valores.oc = operatorsCount;
+      commit('updateTrackResult', {retCode:0});
+      commit('updateContractSummary', valores);
+      return 0;
+    } catch (exc) {
+    console.log("getTracksCount --> exc:" + exc);
+    commit('updateTrackResult', {retCode:1,errorMessage:exc.message})
+    return 1;
+    }
   }
 };
 
@@ -152,6 +175,14 @@ const mutations = {
   updateTracks: ({rootState},newTracks) => {
     rootState;
     state.tracks = newTracks;
+    //console.log(state.tracks);
+  },
+  updateContractSummary: ({rootState},valores) => {
+    console.log("updateContractSummary --> tc: " + valores.tc);
+    console.log("updateContractSummary --> oc: " + valores.oc);
+    rootState;
+    state.tracksCount = valores.tc;
+    state.operatorsCount = valores.oc;
     //console.log(state.tracks);
   },
   updateTrackResult: ({rootState},result) => {

@@ -1,19 +1,50 @@
 <template>
-	<div class="col-9">
-		<h4 class="titleContainer">Admin</h4>
-		<p class="text-justify">Administration operations for Wikidrone System</p>
-    <div v-if="(getAdminResult !=null) && (getAdminResult.retCode != 0)" class="alert alert-danger w-100" role="alert">
-      <b>Problemas procesando registro: {{getAdminResult}}</b>
-    </div>
-    <div v-else-if="(getAdminResult !=null) && (getAdminResult.retCode==0)" class="alert alert-success w-100" role="alert">
-      <b>Operación realizada correctamente {{getAdminResult.retCode}}</b>
-    </div>
-    <div class="w-50">
-      <span>Reset System</span>
-      <button type="button" class="btn btn btn-danger" @click="resetSystem">Reset</button>
-      <hr class="mt-3 mb-3">
-      <button type="button" class="btn btn-outline-info float-left" @click="sendHome">Volver</button>
-    </div>
+	<div class="content-wrapper">
+		<section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Administration</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item active"><a href="/admin">Admin</a></li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+		<!-- Main content -->
+		<section class="content">
+			<div class="container-fluid">
+				<div class="row">
+				<div v-if="(getAdminResult !=null) && (getAdminResult.retCode != 0)" class="alert alert-danger col-6" role="alert">
+					<b>Problemas procesando registro: {{getAdminResult}}</b>
+				</div>
+				<div v-else-if="(getAdminResult !=null) && (getAdminResult.retCode==0)" class="alert alert-success col-6" role="alert">
+					<b>Operación realizada correctamente {{getAdminResult.retCode}}</b>
+				</div>
+			</div>
+				<div class="row">
+					<div class="col-6">
+					    <div class="card">
+								<div class="card-header">
+									<h3 class="card-title">Administration operations</h3>
+								</div>
+								<div class="card-body">
+					      	<span>Reset System</span>
+					      	<button type="button" class="btn btn btn-danger" @click="resetSystem">Reset</button>
+								</div><!-- car-body-->
+					    </div>
+							<hr class="mt-3 mb-3"/>
+							<button type="button" class="btn btn-outline-info float-left" @click="sendHome">Volver</button>
+						</div><!--col6-->
+					</div><!--row-->
+			</div><!--container-fluid-->
+		</section>
+
 	</div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
   <div class="image-container w-100">
-        <img 	v-for="image in getImageList"	:key="image._id" class="border border-warning" :src="getImageURI(image._id)"/>
+        <img 	v-for="image in getImageList"	:key="image._id" class="" :src="getImageURI(image._id)"/>
   </div>
 </template>
 

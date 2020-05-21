@@ -1,62 +1,107 @@
 <template>
-  <div class="col-md-8 border rounded" id="registerContainer">
-    <h4 class="titleContainer">Register</h4>
-    <form>
-      <div v-if="errors.length>0" class="alert alert-danger w-50" role="alert">
-        <b>Please correct the following error(s):</b>
-        <ul>
-          <li v-for="error in this.errors" v-bind:key="error">{{ error }}</li>
-        </ul>
-      </div>
-      <div v-if="(getResult !=null) && (getResult.retCode != 0)" class="alert alert-danger w-50" role="alert">
-        <b>Problemas procesando registro: {{getResult.retCode}}</b>
-      </div>
-      <div v-else-if="(getResult !=null) && (getResult.retCode==0)" class="alert alert-success w-50" role="alert">
-        <b>Registro procesado correctamente {{getResult}}</b>
-      </div>
-      <div class="w-50">
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">Name</span>
+  <div class="content-wrapper" id="registerContainer">
+
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Register</h1>
           </div>
-          <input type="text" class="form-control " placeholder="Name" aria-label="Name" aria-describedby="basic-addon1" id="name" v-model="name">
-        </div>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon2">Postal Address</span>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active"><a href="/register">Register</a></li>
+            </ol>
           </div>
-          <input type="text" class="form-control " placeholder="Postal Address" aria-label="Postal Address" aria-describedby="basic-addon2" id="postalAddresss" v-model="postalAddress">
         </div>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon3">Email</span>
-          </div>
-          <input type="email" class="form-control " placeholder="Operator's email" aria-label="Email" aria-describedby="Email" id="email" v-model="email">
-        </div>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon3">Company Name</span>
-          </div>
-          <input type="text" class="form-control " placeholder="Company Name" aria-label="Company Name" aria-describedby="Company Name" id="company" v-model="company">
-        </div>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon3">Licence</span>
-          </div>
-          <input type="text" class="form-control " placeholder="Operator's licence" aria-label="Licence" aria-describedby="Licence" id="licence" v-model="licence">
-        </div>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon3">Address</span>
-          </div>
-          <select class="custom-select custom-select-mb" id="account" v-model="account">
-            <option v-for="account in this.getAccounts" :value="account" v-bind:key="account">{{ account }}</option>
-          </select>
-        </div>
-        <button type="button" class="btn btn-outline-info float-left" @click="listRegister">Cancelar</button>
-        <button type="button" class="btn btn-outline-info float-right" @click="sendRegister">Aceptar</button>
-      </div>
-    </form>
+      </div><!-- /.container-fluid -->
+    </section>
+
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="container-fluid">
+            <div class="row">
+              <!-- left column -->
+              <div class="col-md-6">
+                <!-- general form elements -->
+
+                <div v-if="errors.length>0" class="alert alert-danger" role="alert">
+                  <b>Please correct the following error(s):</b>
+                  <ul>
+                    <li v-for="error in this.errors" v-bind:key="error">{{ error }}</li>
+                  </ul>
+                </div>
+                <div v-if="(getResult !=null) && (getResult.retCode != 0)" class="alert alert-danger" role="alert">
+                  <b>Problemas procesando registro: {{getResult}}</b>
+                </div>
+                <div v-else-if="(getResult !=null) && (getResult.retCode==0)" class="alert alert-success" role="alert">
+                  <b>Registro procesado correctamente {{getResult}}</b>
+                </div>
+
+
+
+                <div class="card card-primary">
+                  <div class="card-header">
+                    <h3 class="card-title">Operator information</h3>
+                  </div>
+                  <!-- /.card-header -->
+                  <!-- form start -->
+                  <div class="card-body">
+                  <form>
+
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1">Name</span>
+                        </div>
+                        <input type="text" class="form-control " placeholder="Name" aria-label="Name" aria-describedby="basic-addon1" id="name" v-model="name">
+                      </div>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon2">Postal Address</span>
+                        </div>
+                        <input type="text" class="form-control " placeholder="Postal Address" aria-label="Postal Address" aria-describedby="basic-addon2" id="postalAddresss" v-model="postalAddress">
+                      </div>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon3">Email</span>
+                        </div>
+                        <input type="email" class="form-control " placeholder="Operator's email" aria-label="Email" aria-describedby="Email" id="email" v-model="email">
+                      </div>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon3">Company Name</span>
+                        </div>
+                        <input type="text" class="form-control " placeholder="Company Name" aria-label="Company Name" aria-describedby="Company Name" id="company" v-model="company">
+                      </div>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon3">Licence</span>
+                        </div>
+                        <input type="text" class="form-control " placeholder="Operator's licence" aria-label="Licence" aria-describedby="Licence" id="licence" v-model="licence">
+                      </div>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon3">Address</span>
+                        </div>
+                        <select class="custom-select custom-select-mb" id="account" v-model="account">
+                          <option v-for="account in this.getAccounts" :value="account" v-bind:key="account">{{ account }}</option>
+                        </select>
+                      </div>
+                      <button type="button" class="btn btn-outline-info float-left" @click="listRegister">Cancelar</button>
+                      <button type="button" class="btn btn-outline-info float-right" @click="sendRegister">Aceptar</button>
+                  </form>
+                </div><!-- car body -->
+                </div>
+                <!-- /.card -->
+              </div>
+            </div>
+            <!-- /.row -->
+          </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+
+
   </div>
 </template>
 
@@ -130,10 +175,5 @@
 </script>
 
 <style scoped>
-#registerContainer{
-margin:10px;
-padding:10px;
-width:100%;
-}
 
 </style>

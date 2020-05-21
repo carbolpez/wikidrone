@@ -1,7 +1,20 @@
 <template>
-  <div class="col-9" id="mycontainer">
-    <h4 class="titleContainer">New Operation</h4>
-    <!--ImageList></ImageList-->
+  <div class="content-wrapper" id="mycontainer">
+    <section class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1>New Track</h1>
+					</div>
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item"><a href="#">Home</a></li>
+							<li class="breadcrumb-item active"><a href="/register">Tracks</a></li>
+						</ol>
+					</div>
+				</div>
+			</div><!-- /.container-fluid -->
+		</section>
     <OperationNewDetail></OperationNewDetail>
   </div>
 </template>
@@ -32,10 +45,4 @@
 </script>
 
 <style scoped>
-#mycontainer{
-margin:10px;
-padding:10px;
-width:100%;
-}
-
 </style>

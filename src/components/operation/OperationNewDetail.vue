@@ -1,84 +1,87 @@
 <template>
-  <div class="row w-100">
-    <div v-if="errors.length>0" class="alert alert-danger w-100" role="alert">
-      <b>Please correct the following error(s):</b>
-      <ul>
-        <li v-for="error in this.errors" v-bind:key="error">{{ error }}</li>
-      </ul>
-    </div>
-    <div v-if="(getTrackResult !=null) && (getTrackResult.retCode != 0)" class="alert alert-danger w-100" role="alert">
-      <b>Problemas procesando registro: {{getTrackResult}}</b>
-    </div>
-    <div v-else-if="(getTrackResult !=null) && (getTrackResult.retCode==0)" class="alert alert-success w-100" role="alert">
-      <b>Registro procesado correctamente {{getTrackResult.retCode}}</b>
-    </div>
-    <div class="w-100">
-      <UploadForm ref="uploadForm" @change="addFile"></UploadForm>
-    </div>
-    <div class="w-100">
-      <ImageList ref="imageList" v-bind:images="this.images"></ImageList>
-    </div>
-    <div class="col-7 content">
-      <GoogleMapsEmpty ref="googleMapsEmpty"></GoogleMapsEmpty>
-    </div>
-    <div class="col-4 ml-5 content">
-      <form>
-        <div class="w-100">
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1">Descripción</span>
-            </div>
-            <input type="text" class="form-control" placeholder="Descripción del track" aria-label="Description" aria-describedby="basic-addon1" id="description" v-model="description">
-          </div>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1">Min. Altitude</span>
-            </div>
-            <input type="text" class="form-control" placeholder="Minimun altitude" aria-label="Min. Altitude" aria-describedby="basic-addon1" id="minAltitude" v-model="minAltitude">
-          </div>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1">Max. Altitude</span>
-            </div>
-            <input type="text" class="form-control" placeholder="Maximum altitude" aria-label="Max. Altitude" aria-describedby="basic-addon1" id="maxAltitude" v-model="maxAltitude">
-          </div>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1">Start Time</span>
-            </div>
-            <input type="text" class="form-control" placeholder="dd/mm/yyyy HH:mi:ss" aria-label="Start time" aria-describedby="basic-addon1" id="startTime" v-model="startTime">
-          </div>
-          <div class="input-group date mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1">End Time</span>
-            </div>
-            <input type="text" class="form-control" placeholder="dd/mm/yyyy HH:mi:ss" aria-label="End time" aria-describedby="basic-addon1" id="endTime" v-model="endTime">
-          </div>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon3">Address</span>
-            </div>
-            <select class="custom-select custom-select-mb" id="account" v-model="account">
-              <option v-for="account in this.getAccounts" :value="account" v-bind:key="account">{{ account }}</option>
-            </select>
-          </div>
-          <button type="button" class="btn btn-outline-info float-left" @click="listOperation">Cancelar</button>
-          <button type="button" class="btn btn-outline-info float-right" @click="sendOperation">Aceptar</button>
+  <div class="content">
+    <div class="row">
+      <div class="col-12">
+        <div v-if="errors.length>0" class="alert alert-danger" role="alert">
+          <b>Please correct the following error(s):</b>
+          <ul>
+            <li v-for="error in this.errors" v-bind:key="error">{{ error }}</li>
+          </ul>
         </div>
-      </form>
-    </div>
-  </div>
+        <div v-if="(getTrackResult !=null) && (getTrackResult.retCode != 0)" class="alert alert-danger" role="alert">
+          <b>Problemas procesando registro: {{getTrackResult}}</b>
+        </div>
+        <div v-else-if="(getTrackResult !=null) && (getTrackResult.retCode==0)" class="alert alert-success" role="alert">
+          <b>Registro procesado correctamente {{getTrackResult.retCode}}</b>
+        </div>
+        <UploadForm ref="uploadForm" @change="addFile"></UploadForm>
+      </div><!--col-12-->
+    </div><!--row-->
+    <div class="row" id="mapas">
+        <div class="col-7">
+          <GoogleMapsEmpty ref="googleMapsEmpty"></GoogleMapsEmpty>
+        </div>
+        <div class="card col-5">
+          <div class="card-header">
+            <h3 class="card-title">Track information</h3>
+          </div>
+          <form>
+            <div class="card-body">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Descripción</span>
+                </div>
+                <input type="text" class="form-control" placeholder="Descripción del track" aria-label="Description" aria-describedby="basic-addon1" id="description" v-model="description">
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Min. Altitude</span>
+                </div>
+                <input type="text" class="form-control" placeholder="Minimun altitude" aria-label="Min. Altitude" aria-describedby="basic-addon1" id="minAltitude" v-model="minAltitude">
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Max. Altitude</span>
+                </div>
+                <input type="text" class="form-control" placeholder="Maximum altitude" aria-label="Max. Altitude" aria-describedby="basic-addon1" id="maxAltitude" v-model="maxAltitude">
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Start Time</span>
+                </div>
+                <input type="text" class="form-control" placeholder="dd/mm/yyyy HH:mi:ss" aria-label="Start time" aria-describedby="basic-addon1" id="startTime" v-model="startTime">
+              </div>
+              <div class="input-group date mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">End Time</span>
+                </div>
+                <input type="text" class="form-control" placeholder="dd/mm/yyyy HH:mi:ss" aria-label="End time" aria-describedby="basic-addon1" id="endTime" v-model="endTime">
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon3">Address</span>
+                </div>
+                <select class="custom-select custom-select-mb" id="account" v-model="account">
+                  <option v-for="account in this.getAccounts" :value="account" v-bind:key="account">{{ account }}</option>
+                </select>
+              </div>
+              <button type="button" class="btn btn-outline-info float-left" @click="listOperation">Cancelar</button>
+              <button type="button" class="btn btn-outline-info float-right" @click="sendOperation">Aceptar</button>
+            </div><!--card-body-->
+          </form>
+        </div>
+  </div><!--row -->
+</div><!--content -->
 </template>
 
 <script>
 import { mapActions, mapGetters} from 'vuex';
 import GoogleMapsEmpty from '../map/GoogleMapsEmpty';
 import UploadForm from '../image/UploadForm';
-import ImageList from '../detail/ImageList';
 import { router } from '../../main';
   export default {
     name: 'OperationNewDetail',
-    components: {GoogleMapsEmpty,UploadForm, ImageList},
+    components: {GoogleMapsEmpty,UploadForm},
     computed: {...mapGetters(['getTrackResult','getAccounts'])},
     data() {
       return {
@@ -196,11 +199,9 @@ import { router } from '../../main';
 </script>
 
 <style scoped>
-.content{
-margin-left:5px;
-margin-top:10px;
-margin-bottom:10px;
+#mapas{
 height:400px;
+margin-top:30px;
 }
 label{
 margin-left:10px;

@@ -9,7 +9,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active"><a href="/register">Tracks</a></li>
+              <li class="breadcrumb-item active"><a href="/tracks">Tracks</a></li>
             </ol>
           </div>
         </div>

@@ -1,5 +1,6 @@
 <template>
   <div class="content">
+    <Spinner v-if="getTrackSpinVisible" ref="spinner"/>
     <div class="row">
       <div class="col-12">
         <div v-if="errors.length>0" class="alert alert-danger" role="alert">
@@ -65,8 +66,8 @@
                   <option v-for="account in this.getAccounts" :value="account" v-bind:key="account">{{ account }}</option>
                 </select>
               </div>
-              <button type="button" class="btn btn-outline-info float-left" @click="listOperation">Cancelar</button>
-              <button type="button" class="btn btn-outline-info float-right" @click="sendOperation">Aceptar</button>
+              <button type="button" class="btn btn-outline-info float-left" @click="listOperation">Cancel</button>
+              <button type="button" class="btn btn-outline-info float-right" @click="sendOperation">Accept</button>
             </div><!--card-body-->
           </form>
         </div>
@@ -75,14 +76,15 @@
 </template>
 
 <script>
+import Spinner from '../layout/Spinner';
 import { mapActions, mapGetters} from 'vuex';
 import GoogleMapsEmpty from '../map/GoogleMapsEmpty';
 import UploadForm from '../image/UploadForm';
 import { router } from '../../main';
   export default {
     name: 'OperationNewDetail',
-    components: {GoogleMapsEmpty,UploadForm},
-    computed: {...mapGetters(['getTrackResult','getAccounts'])},
+    components: {GoogleMapsEmpty,UploadForm,Spinner},
+    computed: {...mapGetters(['getTrackResult','getAccounts','getTrackSpinVisible'])},
     data() {
       return {
         errors: [],
@@ -98,6 +100,7 @@ import { router } from '../../main';
     methods: {
       ...mapActions(['newTrack','setAccounts','setTrackResult','uploadImage','uploadImages']),
       sendOperation: async function() {
+        this.setTrackResult(null);
         this.errors = [];
         if (!this.description) {
           this.errors.push('Descripción obligatoria');

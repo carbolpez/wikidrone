@@ -53,44 +53,12 @@
         <!-- /.col -->
         <div class="col-12">
           <hr class="mt-3 mb-3">
-          <button type="button" class="btn btn-outline-info float-left" @click="sendHome">Volver</button>
-          <button type="button" class="btn btn-outline-info float-right" @click="newRegister">Nuevo Registro</button>
+          <button type="button" class="btn btn-outline-info float-left" @click="sendHome">Back</button>
+          <button type="button" class="btn btn-outline-info float-right" @click="newRegister">New Record</button>
         </div>
       </div>
       <!-- /.row -->
 
-
-      <!--
-    <SearchBar @termChange="searchRegisters"></SearchBar>
-  -->
-<!--
-      <div class="card-body">
-        <p class="text-justify">List of operators registered in the Wikidrone system. To register a new operator click on "New Operator". The registry will store the selected address within the SmartContract authorized operators list and will also store the associated metadata in the centralized database.</p>
-      </div>
-
-    <table v-if="getRegisters.length>0" class="table table-bordered">
-      <thead>
-        <tr>
-          <th scope="col">Address</th>
-          <th scope="col">Name</th>
-          <th scope="col">Postal Address</th>
-          <th scope="col">Email</th>
-          <th scope="col">Company</th>
-          <th scope="col">Licence</th>
-          <th scope="col">Status</th>
-          <th scope="col">Type</th>
-        </tr>
-      </thead>
-      <tbody>
-      <RegisterListItem 	v-for="register in getRegisters"	:register="register" :key="register.address" @itemSelect="registerSelect">
-      </RegisterListItem>
-    </tbody>
-  </table>
-    <hr class="mt-3 mb-3">
-    <button type="button" class="btn btn-outline-info float-left" @click="sendHome">Volver</button>
-    <button type="button" class="btn btn-outline-info float-right" @click="newRegister">Nuevo Registro</button>
-    </div>
-  -->
     </div>
   </div>
 </template>

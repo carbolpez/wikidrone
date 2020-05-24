@@ -27,14 +27,25 @@
 						<div class="card-body">
 			<!--
 			<SearchBar @termChange="findOperations"></SearchBar>
-						-->
-							<ul class="list-group">
-								<OperationListItem 	v-for="operation in allTracks"	:operation="operation" :key="operation.metadata" @itemSelect="operationSelect">
-								</OperationListItem>
-							</ul>
+-->
+							<table id="example2" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>Track Description</th>
+                  <th>Track Metadata</th>
+                  <th>Start Time</th>
+                  <th>Operator Address</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <OperationListItem 	v-for="operation in allTracks"	:operation="operation" :key="operation.metadata" @itemSelect="operationSelect">
+                  </OperationListItem>
+                </tbody>
+              </table>
+
 							<hr class="mt-3 mb-3">
-							<button type="button" class="btn btn-outline-info float-left" @click="sendHome">Volver</button>
-							<button type="button" class="btn btn-outline-info float-right" @click="newRegister">Nueva Operación</button>
+							<button type="button" class="btn btn-outline-info float-left" @click="sendHome">Back</button>
+							<button type="button" class="btn btn-outline-info float-right" @click="newRegister">New Track Simulator</button>
 
 						</div><!-- card-body-->
 					</div><!-- card-->

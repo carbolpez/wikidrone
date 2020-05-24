@@ -7,7 +7,8 @@ const state = {
   result: null,
   imageList: [],
   operatorsCount:0,
-  tracksCount: 0
+  tracksCount: 0,
+  spinVisible: false
 };
 
 const getters = {
@@ -15,7 +16,8 @@ const getters = {
   getTrackResult: state => state.result,
   getImageList: state => state.imageList,
   getTracksCount: state=> state.tracksCount,
-  getOperatorsCount: state=> state.operatorsCount
+  getOperatorsCount: state=> state.operatorsCount,
+  getTrackSpinVisible: state=> state.spinVisible
 };
 
 const actions = {
@@ -36,6 +38,7 @@ const actions = {
   async newTrack({commit}, track) {
     try{
       console.log('newTrack -->  track: ' + JSON.stringify(track));
+      commit('activateSpin');
       var txId = await wikidrone.methods.createTrack(
         track.account,
         JSON.stringify(track.start),
@@ -120,6 +123,7 @@ const actions = {
   async uploadImages ({commit},imagesUpload) {
     console.log("uploadImages --> imagesUpload.metadata: " + imagesUpload.metadata);
     console.log("uploadImages --> imagesUpload.images.length: " + imagesUpload.images.length);
+    commit('activateSpin');
     const URL = configApp.configVars.CLOUD_URL + "/" + configApp.configVars.CONTEXT + "/" + configApp.configVars.SEND_OPERATION_IMAGES_URI;
     //Tenemos que tomar el file, solo tenemos su referencia al disco. FomrData es objete de especificación javascript
     const formData = new FormData();
@@ -175,7 +179,12 @@ const mutations = {
   updateTracks: ({rootState},newTracks) => {
     rootState;
     state.tracks = newTracks;
+    state.spinVisible = false;
     //console.log(state.tracks);
+  },
+  activateSpin: ({rootState}) => {
+    rootState;
+    state.spinVisible = true;
   },
   updateContractSummary: ({rootState},valores) => {
     console.log("updateContractSummary --> tc: " + valores.tc);
@@ -194,6 +203,7 @@ const mutations = {
     else {
       state.result = null;
     }
+    state.spinVisible = false;
   },
   updateImages: ({rootState},result) => {
     rootState;
@@ -205,6 +215,7 @@ const mutations = {
     else {
       state.imageList = null;
     }
+    state.spinVisible = false;
   }
 };
 

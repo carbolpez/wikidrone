@@ -21,6 +21,7 @@
         <!-- Main content -->
         <section class="content">
           <div class="container-fluid">
+				    <Spinner v-if="getRegisterSpinVisible" ref="spinner"/>
             <div class="row">
               <!-- left column -->
               <div class="col-md-6">
@@ -88,8 +89,8 @@
                           <option v-for="account in this.getAccounts" :value="account" v-bind:key="account">{{ account }}</option>
                         </select>
                       </div>
-                      <button type="button" class="btn btn-outline-info float-left" @click="listRegister">Cancelar</button>
-                      <button type="button" class="btn btn-outline-info float-right" @click="sendRegister">Aceptar</button>
+                      <button type="button" class="btn btn-outline-info float-left" @click="listRegister">Cancel</button>
+                      <button type="button" class="btn btn-outline-info float-right" @click="sendRegister">Accept</button>
                   </form>
                 </div><!-- car body -->
                 </div>
@@ -106,6 +107,7 @@
 </template>
 
 <script>
+  import Spinner from '../layout/Spinner';
   import { mapActions, mapGetters} from 'vuex';
   import { router } from '../../main';
   export default {
@@ -116,6 +118,7 @@
         router.push({name:'register'});
       },
       sendRegister: async function() {
+        this.resetResult();
         this.errors = [];
 
         if (!this.name) {
@@ -152,7 +155,7 @@
         }
 			}
     },
-    computed: {...mapGetters(['getResult','getAccounts'])},
+    computed: {...mapGetters(['getResult','getAccounts','getRegisterSpinVisible'])},
     props: [],
     data() {
 			return {
@@ -162,10 +165,12 @@
         email: null,
         company: null,
         licence: null,
-        account: null
+        account: null,
+        spinVisible: false
       };
 		},
     components: {
+      Spinner
     },
     created: function () {
       this.resetResult();

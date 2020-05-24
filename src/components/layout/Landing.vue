@@ -69,6 +69,18 @@
 					</div>
 				</div>
 				<!-- /.row -->
+				<div v-if="spinVisible" class="row">
+					<div class="card col-3">
+							<div class="card-header">
+								Loading information from ethereum blockchain...
+							</div>
+							<div class="card-body d-flex justify-content-center">
+								<div class="spinner-grow text-primary" role="status">
+  								<span class="sr-only">Loading...</span>
+								</div>
+							</div>
+					</div>
+				</div>
 			</div><!-- /.container-fluid -->
 		</section>
 	</div>
@@ -81,8 +93,15 @@ import { mapActions, mapGetters} from 'vuex';
 		name: 'Landig',
 		methods: {...mapActions(['initContractSummary',])},
 		computed: {...mapGetters(['getTracksCount', 'getOperatorsCount'])},
+		data() {
+			return {
+				spinVisible: false
+      };
+		},
 		created: function () {
+			this.spinVisible = true;
       this.initContractSummary();
+			this.spinVisible = false;
     }
 	};//default
 </script>

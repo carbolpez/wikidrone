@@ -1,7 +1,15 @@
 <template>
+  <!--
   <li class="list-group-item media" @click="onOperationSelect">
   {{ operation.description }}
   </li>
+-->
+  <tr @click="onOperationSelect">
+    <td>{{operation.description}}</td>
+    <td>{{operation.metadata}}</td>
+    <td>{{new Date(parseInt(operation.startTime)).toLocaleString()}}</td>
+    <td>{{operation.operator}}</td>
+  </tr>
 </template>
 
 <script>

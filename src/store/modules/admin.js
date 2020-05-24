@@ -1,20 +1,24 @@
 
 import axios from 'axios';
 import configApp from '../../common/params';
+//import web3 from '../../../ethereum/web3';
 
 //import web3 from '../../../ethereum/web3';
 import wikidrone from '../../../ethereum/wikidrone';
 const state = {
   result: null,
+  spinVisible: false
 };
 
 const getters = {
   getAdminResult: state => state.result,
+  getAdminSpinVisible: state => state.spinVisible
 };
 
 const actions = {
   async resetSystem({commit}){
-    console.log('resetSystem --> commit: ' + commit);
+    console.log('resetSystem --> Iniciando...');
+    commit('activateSpin');
     //console.log('findRegisters --> searchTerm: ' + searchTerm);
     try{
       //Register Metadata
@@ -25,7 +29,13 @@ const actions = {
 
       let URL = configApp.configVars.CLOUD_URL + "/" + configApp.configVars.CONTEXT + "/" + configApp.configVars.FIND_REGISTERS_URI;
       //console.log("findRegisters --> URL: " + URL);
-
+      /*
+      //Para borrar directamente un operador si se ha descompensado blockchain con mongo
+      var accounts = await web3.eth.getAccounts();
+      await wikidrone.methods.resetOperator(accounts[0]).send({from: accounts[0], gas:'1000000'});
+      const operatorsCount = await wikidrone.methods.operatorsCount().call();
+      console.log("operatorsCount: " + operatorsCount);
+      */
       axios.post(URL, data, headers).then(async function callback(response, err){
 
         if(!err){
@@ -102,6 +112,11 @@ const mutations = {
     else {
       state.result = null;
     }
+    state.spinVisible = false;
+  },
+  activateSpin: ({rootState}) => {
+    rootState;
+    state.spinVisible = true;
   }
 };
 

@@ -23,7 +23,7 @@
     <div class="content" id="buttons">
       <div class="row">
         <div class="col-12">
-            <button type="button" class="btn btn-outline-info float-left" @click="listOperation">Volver</button>
+            <button type="button" class="btn btn-outline-info float-left" @click="listOperation">Back</button>
         </div>
       </div>
     </div>

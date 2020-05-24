@@ -19,6 +19,7 @@
 		<!-- Main content -->
 		<section class="content">
 			<div class="container-fluid">
+				<Spinner v-if="getAdminSpinVisible" ref="spinner"/>
 				<div class="row">
 				<div v-if="(getAdminResult !=null) && (getAdminResult.retCode != 0)" class="alert alert-danger col-6" role="alert">
 					<b>Problemas procesando registro: {{getAdminResult}}</b>
@@ -35,11 +36,11 @@
 								</div>
 								<div class="card-body">
 					      	<span>Reset System</span>
-					      	<button type="button" class="btn btn btn-danger" @click="resetSystem">Reset</button>
+					      	<button type="button" class="btn btn btn-danger" @click="resetSystemWrapper">Reset</button>
 								</div><!-- car-body-->
 					    </div>
 							<hr class="mt-3 mb-3"/>
-							<button type="button" class="btn btn-outline-info float-left" @click="sendHome">Volver</button>
+							<button type="button" class="btn btn-outline-info float-left" @click="sendHome">Back</button>
 						</div><!--col6-->
 					</div><!--row-->
 			</div><!--container-fluid-->
@@ -49,6 +50,7 @@
 </template>
 
 <script>
+import Spinner from '../layout/Spinner';
 import { router } from '../../main';
 import { mapActions, mapGetters} from 'vuex';
 	export default {
@@ -57,12 +59,26 @@ import { mapActions, mapGetters} from 'vuex';
       ...mapActions(['resetSystem', 'resetAdminResult']),
       sendHome: function(){
         router.push({name:'landing'});
-      }
+      },
+			resetSystemWrapper: async function(){
+				this.resetAdminResult();
+				this.resetSystem();
+			}
     },
-    computed: {...mapGetters(['getAdminResult'])},
+		data() {
+			return {
+				spinVisible: false
+      };
+		},
+    computed: {...mapGetters(['getAdminResult','getAdminSpinVisible'])},
     created: function () {
       this.resetAdminResult();
-    }
+    },
+		components: {
+			//SearchBar,
+			//OperationList
+			Spinner
+		}
 	};//default
 </script>
 

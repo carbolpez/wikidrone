@@ -1,7 +1,7 @@
 'use strict';
 
 var configVars = {
-  CLOUD_URL: "http://192.168.0.159:3000",
+  CLOUD_URL: "http://ec2-34-253-215-86.eu-west-1.compute.amazonaws.com:3000",
   ETHEREUM_URL: "ws://192.168.0.159:7545",
   CONTEXT: "service",
   REGISTER_OPERATOR_URI: "registry/registerOperator",

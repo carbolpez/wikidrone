@@ -15,6 +15,7 @@ if (typeof window !== 'undefined' && typeof window.web3 !== 'undefined') {
 }
 */
 //const web3 = new Web3(configApp.configVars.ETHEREUM_URL);
+//Utilizamos proveedor local
 const web3 = new Web3(window.web3.currentProvider);
 window.ethereum.enable();
 export default web3;

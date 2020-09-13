@@ -1,8 +1,10 @@
 'use strict';
 
 var configVars = {
-  CLOUD_URL: "http://ec2-34-253-215-86.eu-west-1.compute.amazonaws.com:3000",
-  ETHEREUM_URL: "ws://192.168.0.159:7545",
+  //CLOUD_URL: "http://ec2-34-253-215-86.eu-west-1.compute.amazonaws.com:3000",
+  CLOUD_URL: "http://www.wikidrone.es/services",
+  //CLOUD_URL: "http://192.168.0.17:3000",
+  ETHEREUM_URL: "ws://192.168.0.17:7545",
   CONTEXT: "service",
   REGISTER_OPERATOR_URI: "registry/registerOperator",
   FIND_REGISTERS_URI: "registry/findRegisters",
@@ -13,6 +15,7 @@ var configVars = {
   FETCH_IMAGELIST_URI: "track/getImageList",
   GET_IMAGE_URI: "track/getImage",
   RINKEBY_PRIVATE_KEY: "0x348ce564d427a3311b6536bbcff9390d69395b06ed6c486954e971d960fe8709",
+  //CONTRACT_ADDRESS: "0x7E893efCD38834a3d955d40c3D4ae19A6CB0F42b", //GANACHE
   //CONTRACT_ADDRESS: "0x84212C147aC836661Ea351cb3B5fdb670d68c53C",
   CONTRACT_ADDRESS: "0x502bf4Be87E56974180060c49b6F3ec0337D6fE1", //RINKEBY
   //OPERATOR_MANAGER: 0x980634e287976c02e71ed2611117525cAda3777e

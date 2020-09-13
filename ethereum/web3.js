@@ -1,5 +1,5 @@
 import Web3 from 'web3';
-//import configApp from '../src/common/params';
+import configApp from '../src/common/params';
 /*
 let web3;
 
@@ -14,7 +14,6 @@ if (typeof window !== 'undefined' && typeof window.web3 !== 'undefined') {
   web3 = new Web3(provider);
 }
 */
-//const web3 = new Web3('ws://127.0.0.1:7545');
 //const web3 = new Web3(configApp.configVars.ETHEREUM_URL);
 const web3 = new Web3(window.web3.currentProvider);
 window.ethereum.enable();

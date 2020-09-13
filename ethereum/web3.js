@@ -1,5 +1,5 @@
 import Web3 from 'web3';
-import configApp from '../src/common/params';
+//import configApp from '../src/common/params';
 /*
 let web3;
 

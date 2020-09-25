@@ -5,19 +5,22 @@ import configApp from '../../common/params';
 const state = {
   result: {},
   registers: [],
-  accounts: []
+  accounts: [],
+  spinVisible: false
 };
 
 const getters = {
   getResult: state => state.result,
   getAccounts: state => state.accounts,
-  getRegisters: state => state.registers
+  getRegisters: state => state.registers,
+  getRegisterSpinVisible: state => state.spinVisible
 };
 
 const actions = {
   async registerOperator({commit}, account){
     try {
         console.log('registerOperator --> account: ' + account);
+        commit('activateSpin');
         await wikidrone.methods.registerOperator().send({from: account, gas:'1000000'});
         const operatorsCount = await wikidrone.methods.operatorsCount().call();
         console.log('registerOperator --> operatorsCount: ' + operatorsCount);
@@ -63,6 +66,7 @@ const actions = {
   },
   async registerOperatorMetadata({commit}, operatorMetadata) {
     console.log('registerOperatorMetadata --> operatorMetadata: ' + operatorMetadata);
+    commit('activateSpin');
     try{
           //Register Metadata
           const data = operatorMetadata;
@@ -92,8 +96,9 @@ const actions = {
   },
   async setAccounts({commit}) {
     try {
+      console.log("setAccounts --> window.ethereum: " + window.ethereum);
       var accounts = await web3.eth.getAccounts();
-      //console.log("setAccounts --> accounts: " + accounts);
+      console.log("setAccounts --> accounts: " + accounts);
       commit('updateResult', null);
       commit('updateAccounts', accounts);
     }catch(exc){
@@ -118,10 +123,15 @@ const mutations = {
     else {
       state.result = null;
     }
+    state.spinVisible = false;
   },
   updateAccounts: ({rootState},accounts) => {
     rootState;
     state.accounts = accounts;
+  },
+  activateSpin: ({rootState}) => {
+    rootState;
+    state.spinVisible = true;
   }
 };
 

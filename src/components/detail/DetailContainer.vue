@@ -1,12 +1,32 @@
 <template>
-  <div class="col-md-9 border rounded">
-    <h4 class="titleContainer">Operation Details</h4>
-    <div v-if="(getTrackResult !=null) && (getTrackResult.retCode != 0)" class="alert alert-danger w-100" role="alert">
+  <div class="content-wrapper">
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Track Details</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active"><a href="/tracks">Tracks</a></li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    <div v-if="(getTrackResult !=null) && (getTrackResult.retCode != 0)" class="alert alert-danger" role="alert">
       <b>Problemas procesando registro: {{getTrackResult}}</b>
     </div>
     <ImageList :metadata="operation.metadata"></ImageList>
     <OperationDetail :operation="operation"></OperationDetail>
-    <button type="button" class="btn btn-outline-info float-left" @click="listOperation">Volver</button>
+    <div class="content" id="buttons">
+      <div class="row">
+        <div class="col-12">
+            <button type="button" class="btn btn-outline-info float-left" @click="listOperation">Back</button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -39,9 +59,7 @@
 </script>
 
 <style scoped>
-div{
-margin:10px;
-padding:10px;
-width:100%;
+#buttons{
+  margin-top: 100px;
 }
 </style>

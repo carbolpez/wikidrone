@@ -1,20 +1,60 @@
 <template>
-	<div class="col-9">
-		<h4 class="titleContainer">Operation List</h4>
-		<p class="text-justify">List of Flight Operations registered in smartcontract Wikidrone.sol for Ethereum blockchain distributed database. To create a new operation click on "New Operation". It is necessary to use an Ethereum User Address that has been registered in the smartcontract as an authorized operator. Clicking on the list will open a view with the detail of the registered operation where you can consult the flight coordinates stored in a distributed blockchain database</p>
-		<div class="w-50">
+	<div class="content-wrapper">
+		<section class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1>List of Tracks</h1>
+					</div>
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item"><a href="#">Home</a></li>
+							<li class="breadcrumb-item active"><a href="/register">Tracks</a></li>
+						</ol>
+					</div>
+				</div>
+			</div><!-- /.container-fluid -->
+		</section>
+
+		<div class="content">
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header">
+							<h3 class="card-title">List of all tracks from smartcontract</h3>
+						</div>
+						<!-- /.card-header -->
+						<div class="card-body">
 			<!--
 			<SearchBar @termChange="findOperations"></SearchBar>
-		-->
-			<ul class="list-group">
-				<OperationListItem 	v-for="operation in allTracks"	:operation="operation" :key="operation.metadata" @itemSelect="operationSelect">
-				</OperationListItem>
-			</ul>
-			<hr class="mt-3 mb-3">
-			<button type="button" class="btn btn-outline-info float-left" @click="sendHome">Volver</button>
-			<button type="button" class="btn btn-outline-info float-right" @click="newRegister">Nueva Operación</button>
-		</div>
-	</div>
+-->
+							<table id="example2" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>Track Description</th>
+                  <th>Track Metadata</th>
+                  <th>Start Time</th>
+                  <th>Operator Address</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <OperationListItem 	v-for="operation in allTracks"	:operation="operation" :key="operation.metadata" @itemSelect="operationSelect">
+                  </OperationListItem>
+                </tbody>
+              </table>
+
+							<hr class="mt-3 mb-3">
+							<button type="button" class="btn btn-outline-info float-left" @click="sendHome">Back</button>
+							<button type="button" class="btn btn-outline-info float-right" @click="newRegister">New Track Simulator</button>
+
+						</div><!-- card-body-->
+					</div><!-- card-->
+				</div><!-- col-->
+			</div><!-- row-->
+		</div><!-- content-->
+
+
+	</div><!--container-->
 </template>
 
 <script>
@@ -63,9 +103,5 @@ import { mapActions,mapGetters} from 'vuex';
 </script>
 
 <style scoped>
-div{
-margin:10px;
-padding:10px;
-width:100%;
-}
+
 </style>

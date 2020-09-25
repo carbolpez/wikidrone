@@ -1,35 +1,39 @@
 <template>
-  <div class="container">
-  <h5 class="titleDetail">{{ operation.description }}</h5>
-  <div class="row border">
-    <div class="col-md-7 border content">
-      <GoogleMaps :operation="operation"></GoogleMaps>
+  <div class="content">
+    <div class="row">
+      <div class="col-12">
+        <h5 class="titleDetail">{{ operation.description }}</h5>
+        <div class="row border">
+          <div class="col-md-7 border content">
+            <GoogleMaps :operation="operation"></GoogleMaps>
 
-    </div>
-    <div class="col-md-4 border content">
-      <form>
-        <div class="form-row">
-            <label>Operator Address:</label><label>{{operation.operator}}</label>
+          </div>
+          <div class="col-md-4 border content">
+            <form>
+              <div class="form-row">
+                  <label>Operator Address:</label><label>{{operation.operator}}</label>
+              </div>
+              <div class="form-row">
+                  <label>Start Time:</label><label>{{new Date(parseInt(operation.startTime)).toLocaleString()}}</label>
+              </div>
+              <div class="form-row">
+                  <label>End Time:</label><label>{{new Date(parseInt(operation.endTime)).toLocaleString()}}</label>
+              </div>
+              <div class="form-row">
+                  <label>Min. Altitude:</label><label>{{operation.minAltitude}}</label>
+              </div>
+              <div class="form-row">
+                  <label>Max. Altitude:</label><label>{{operation.maxAltitude}}</label>
+              </div>
+              <div class="form-row">
+                  <label>Metadata:</label><label>{{operation.metadata}}</label>
+              </div>
+            </form>
+          </div>
         </div>
-        <div class="form-row">
-            <label>Start Time:</label><label>{{new Date(parseInt(operation.startTime)).toLocaleString()}}</label>
-        </div>
-        <div class="form-row">
-            <label>End Time:</label><label>{{new Date(parseInt(operation.endTime)).toLocaleString()}}</label>
-        </div>
-        <div class="form-row">
-            <label>Min. Altitude:</label><label>{{operation.minAltitude}}</label>
-        </div>
-        <div class="form-row">
-            <label>Max. Altitude:</label><label>{{operation.maxAltitude}}</label>
-        </div>
-        <div class="form-row">
-            <label>Metadata:</label><label>{{operation.metadata}}</label>
-        </div>
-      </form>
     </div>
   </div>
-  </div>
+</div>
 </template>
 
 <script>
